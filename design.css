@@ -484,100 +484,6 @@ main{
     padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 6vw, 6rem);
     border-bottom: 1px solid rgba(255,255,255,0.07);
     background-color: rgba(3,7,18,0.85);
-    position: relative;
-    overflow: hidden;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-}
-
-.section-content {
-    max-width: 55%;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    z-index: 1;
-}
-
-.section.cube-right .section-content {
-    margin-left: 0;
-    margin-right: auto;
-}
-
-.section.cube-left .section-content {
-    margin-left: auto;
-    margin-right: 0;
-}
-
-.floating-tesseract {
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    transform-style: preserve-3d;
-    pointer-events: all;
-    z-index: 5;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-/* Outer Cube */
-.floating-tesseract::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%) 
-               rotateX(calc(25deg + var(--mouse-y, 0) * 20deg)) 
-               rotateY(calc(35deg + var(--mouse-x, 0) * 20deg));
-    transform-style: preserve-3d;
-    border: 2px solid rgba(74, 242, 255, 0.8);
-    background: transparent;
-    box-shadow: 
-        0 0 40px rgba(74, 242, 255, 0.4),
-        0 0 80px rgba(74, 242, 255, 0.2);
-    animation: cube-float 4s ease-in-out infinite;
-}
-
-/* Inner Cube */
-.floating-tesseract::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 60%;
-    height: 60%;
-    transform: translate(-50%, -50%) 
-               rotateX(calc(25deg - var(--mouse-y, 0) * 20deg)) 
-               rotateY(calc(35deg - var(--mouse-x, 0) * 20deg));
-    transform-style: preserve-3d;
-    border: 2px solid rgba(180, 91, 255, 0.9);
-    background: transparent;
-    box-shadow: 
-        0 0 30px rgba(180, 91, 255, 0.5),
-        0 0 60px rgba(180, 91, 255, 0.3),
-        inset 0 0 40px rgba(180, 91, 255, 0.2);
-    animation: cube-float 4s ease-in-out infinite reverse;
-}
-
-/* Create 3D cube faces using box-shadow */
-.floating-tesseract::before,
-.floating-tesseract::after {
-    box-shadow: 
-        /* Front glow */
-        0 0 40px rgba(74, 242, 255, 0.3),
-        /* Top face */
-        0 -150px 0 -148px rgba(74, 242, 255, 0.6),
-        /* Bottom face */
-        0 150px 0 -148px rgba(74, 242, 255, 0.6),
-        /* Left face */
-        -150px 0 0 -148px rgba(180, 91, 255, 0.6),
-        /* Right face */
-        150px 0 0 -148px rgba(180, 91, 255, 0.6),
-        /* Connecting edges glow */
-        0 0 80px rgba(74, 242, 255, 0.2);
 }
 
 .section::before{
@@ -1384,13 +1290,6 @@ main{
     .hero-visual{
         margin: 0 auto;
     }
-    .floating-tesseract{
-        display: none;
-    }
-    .section-content{
-        max-width: 100% !important;
-        margin: 0 auto !important;
-    }
 }
 @keyframes pan-bg {
     0% { background-position: center top; }
@@ -1723,18 +1622,5 @@ main{
     }
     100% {
         transform: translate(-50%, -50%) rotateY(360deg) rotateX(360deg);
-    }
-}
-
-@keyframes cube-float {
-    0%, 100% {
-        transform: translate(-50%, -50%) 
-                   rotateX(calc(25deg + var(--mouse-y, 0) * 20deg)) 
-                   rotateY(calc(35deg + var(--mouse-x, 0) * 20deg))\n                   translateZ(0px);
-    }
-    50% {
-        transform: translate(-50%, -50%) 
-                   rotateX(calc(25deg + var(--mouse-y, 0) * 20deg)) 
-                   rotateY(calc(35deg + var(--mouse-x, 0) * 20deg))\n                   translateZ(20px);
     }
 }

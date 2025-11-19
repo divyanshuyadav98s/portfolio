@@ -95,12 +95,8 @@
     </header>
 
     <main>
-      <!-- Floating Tesseract Cube -->
-      <div class="floating-tesseract"></div>
-
-      <section id="about" class="section cube-right">
-        <div class="section-content">
-          <div class="section-heading">
+      <section id="about" class="section">
+        <div class="section-heading">
             <p class="eyebrow">About</p>
             <h2>The story behind the pixels.</h2>
           </div>
@@ -120,7 +116,7 @@
         </div>
       </section>
 
-      <section id="skills" class="section soft-dark cube-left">
+      <section id="skills" class="section soft-dark">
         <div class="section-content">
           <div class="section-heading">
             <p class="eyebrow">Skills</p>
@@ -167,7 +163,7 @@
         </div>
       </section>
 
-      <section id="projects" class="section cube-right">
+      <section id="projects" class="section">
         <div class="section-content">
           <div class="section-heading">
             <p class="eyebrow">Projects</p>
@@ -220,7 +216,7 @@
         </div>
       </section>
 
-      <section id="experience" class="section soft-dark cube-left">
+      <section id="experience" class="section soft-dark">
         <div class="section-content">
           <div class="section-heading">
             <p class="eyebrow">Journey</p>
@@ -273,7 +269,7 @@
         </div>
       </section>
 
-      <section id="process" class="section cube-right">
+      <section id="process" class="section">
         <div class="section-content">
           <div class="section-heading">
             <p class="eyebrow">Process</p>
@@ -316,7 +312,7 @@
         </div>
       </section>
 
-      <section id="contact" class="section gradient-panel cube-left">
+      <section id="contact" class="section gradient-panel">
         <div class="section-content">
           <div class="section-heading">
             <p class="eyebrow">Contact</p>
@@ -559,92 +555,7 @@
         });
       }
 
-      // 3D Tesseract (Hypercube) Interactive System
-      const sections = document.querySelectorAll(".section");
-      const floatingTesseract = document.querySelector(".floating-tesseract");
-      let tesseractMouseX = 0,
-        tesseractMouseY = 0;
-      let currentMouseX = 0,
-        currentMouseY = 0;
-
-      document.addEventListener("mousemove", (e) => {
-        tesseractMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        tesseractMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-      });
-
-      function updateTesseractPosition() {
-        let currentSection = null;
-        const scrollY = window.scrollY + window.innerHeight / 2;
-
-        sections.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          const sectionTop = window.scrollY + rect.top;
-          const sectionBottom = sectionTop + rect.height;
-
-          if (scrollY >= sectionTop && scrollY <= sectionBottom) {
-            currentSection = section;
-          }
-        });
-
-        if (currentSection && floatingTesseract) {
-          const isRight = currentSection.classList.contains("cube-right");
-
-          if (isRight) {
-            floatingTesseract.style.right = "5%";
-            floatingTesseract.style.left = "auto";
-          } else {
-            floatingTesseract.style.left = "5%";
-            floatingTesseract.style.right = "auto";
-          }
-        }
-      }
-
-      function animateTesseract() {
-        currentMouseX += (tesseractMouseX - currentMouseX) * 0.05;
-        currentMouseY += (tesseractMouseY - currentMouseY) * 0.05;
-
-        if (floatingTesseract) {
-          floatingTesseract.style.setProperty("--mouse-x", currentMouseX);
-          floatingTesseract.style.setProperty("--mouse-y", currentMouseY);
-        }
-
-        requestAnimationFrame(animateTesseract);
-      }
-
-      animateTesseract();
-      updateTesseractPosition();
-
-      window.addEventListener("scroll", updateTesseractPosition);
-      window.addEventListener("resize", updateTesseractPosition);
-
-      // Particle explosion on click
-      if (floatingTesseract) {
-        floatingTesseract.style.pointerEvents = "all";
-        floatingTesseract.addEventListener("click", (e) => {
-          const rect = floatingTesseract.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          for (let i = 0; i < 20; i++) {
-            const particle = document.createElement("div");
-            particle.className = "tesseract-particle";
-            particle.style.left = x + "px";
-            particle.style.top = y + "px";
-            particle.style.setProperty("--angle", Math.random() * 360 + "deg");
-            particle.style.setProperty(
-              "--distance",
-              Math.random() * 200 + 100 + "px"
-            );
-            particle.style.setProperty(
-              "--duration",
-              Math.random() * 0.5 + 0.5 + "s"
-            );
-            floatingTesseract.appendChild(particle);
-
-            setTimeout(() => particle.remove(), 1000);
-          }
-        });
-      }
+      // Tesseract removed
     </script>
   </body>
 </html>
