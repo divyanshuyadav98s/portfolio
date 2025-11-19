@@ -238,6 +238,25 @@ h1{
     text-transform: uppercase;
     animation: glow-text 5s ease-in-out infinite;
     margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+h1:hover{
+    transform: scale(1.02);
+    -webkit-text-stroke: 3px rgba(180, 91, 255, 0.9);
+    filter: drop-shadow(0 0 20px rgba(180, 91, 255, 0.6));
+}
+
+h2, h3{
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+h2:hover, h3:hover{
+    color: #4af2ff;
+    transform: translateX(5px);
+    text-shadow: 0 0 15px rgba(74, 242, 255, 0.5);
 }
 
 .hero-stats{
@@ -260,6 +279,12 @@ h1{
     font-size: 1.8rem;
     display: block;
     color: #4af2ff;
+    transition: all 0.3s ease;
+}
+
+.hero-stats li:hover strong{
+    transform: scale(1.1);
+    text-shadow: 0 0 20px rgba(74, 242, 255, 0.8);
 }
 
 .hero-stats span{
@@ -345,6 +370,12 @@ h1{
     display: block;
     font-size: 1rem;
     margin-bottom: 0.2rem;
+    transition: all 0.3s ease;
+}
+
+.floating-card:hover strong{
+    color: #4af2ff;
+    text-shadow: 0 0 10px rgba(74, 242, 255, 0.6);
 }
 
 .floating-card span{
@@ -373,6 +404,14 @@ h1{
     font-size: 0.8rem;
     color: rgba(255,255,255,0.75);
     margin-bottom: 1rem;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.eyebrow:hover{
+    letter-spacing: 8px;
+    color: #4af2ff;
+    text-shadow: 0 0 15px rgba(74, 242, 255, 0.6);
 }
 
 .hero-subtitle{
@@ -380,6 +419,14 @@ h1{
     line-height: 1.6;
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hero-subtitle:hover{
+    color: rgba(255, 255, 255, 1);
+    transform: translateX(3px);
+    text-shadow: 0 0 10px rgba(74, 242, 255, 0.3);
 }
 
 .hero-cta{
@@ -454,6 +501,17 @@ main{
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 2rem;
     line-height: 1.7;
+}
+
+.about-grid p{
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.about-grid p:hover{
+    color: rgba(255, 255, 255, 0.95);
+    transform: translateX(5px);
+    text-shadow: 0 0 8px rgba(74, 242, 255, 0.2);
 }
 
 .about-list{
@@ -589,9 +647,23 @@ main{
     letter-spacing: 2px;
 }
 
+.project-card h3{
+    transition: all 0.3s ease;
+}
+
+.project-card:hover h3{
+    color: #4af2ff;
+    text-shadow: 0 0 15px rgba(74, 242, 255, 0.4);
+}
+
 .project-card p{
     color: rgba(220,230,255,0.8);
     line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover p{
+    color: rgba(255,255,255,0.95);
 }
 
 .project-actions{
@@ -656,6 +728,26 @@ main{
     line-height: 1.7;
 }
 
+.contact-card h3{
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.contact-card h3:hover{
+    color: #4af2ff;
+    text-shadow: 0 0 15px rgba(74, 242, 255, 0.5);
+}
+
+.contact-card p{
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.contact-card p:hover{
+    color: rgba(255,255,255,0.95);
+    transform: translateX(3px);
+}
+
 .contact-card ul{
     list-style: none;
     margin-top: 1rem;
@@ -715,11 +807,28 @@ main{
     transition: all 0.4s ease;
 }
 
+.timeline-card h3{
+    transition: all 0.3s ease;
+}
+
+.timeline-card p{
+    transition: all 0.3s ease;
+}
+
 .timeline-card:hover{
     transform: translateX(10px);
     background: rgba(10,15,32,0.95);
     border-color: rgba(74, 242, 255, 0.3);
     box-shadow: 0 20px 40px rgba(74, 242, 255, 0.15);
+}
+
+.timeline-card:hover h3{
+    color: #4af2ff;
+    text-shadow: 0 0 10px rgba(74, 242, 255, 0.4);
+}
+
+.timeline-card:hover p{
+    color: rgba(255,255,255,0.95);
 }
 
 .timeline-year{
@@ -768,8 +877,25 @@ main{
     transition: opacity 0.4s ease;
 }
 
+.process-card h3{
+    transition: all 0.3s ease;
+}
+
+.process-card p{
+    transition: all 0.3s ease;
+}
+
 .process-card:hover::after{
     opacity: 1;
+}
+
+.process-card:hover h3{
+    color: #4af2ff;
+    text-shadow: 0 0 12px rgba(74, 242, 255, 0.5);
+}
+
+.process-card:hover p{
+    color: rgba(255,255,255,0.95);
 }
 
 .process-card .step{
@@ -807,6 +933,12 @@ main{
     font-style: italic;
     color: rgba(229,233,255,0.85);
     margin-bottom: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover .quote{
+    color: rgba(255,255,255,1);
+    text-shadow: 0 0 8px rgba(180, 91, 255, 0.3);
 }
 
 .testimonial-card .author{
