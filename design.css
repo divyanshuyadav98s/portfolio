@@ -460,6 +460,76 @@ main{
     padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 6vw, 6rem);
     border-bottom: 1px solid rgba(255,255,255,0.07);
     background-color: rgba(3,7,18,0.85);
+    position: relative;
+    overflow: hidden;
+}
+
+.section::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(74, 242, 255, 0.15), rgba(180, 91, 255, 0.15));
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: morph 8s ease-in-out infinite, rotate3d 20s linear infinite;
+    transform-style: preserve-3d;
+    pointer-events: none;
+    filter: blur(40px);
+    z-index: 0;
+}
+
+.section > *{
+    position: relative;
+    z-index: 1;
+}
+
+/* Different perspectives for each section */
+#about::before{
+    transform: translate(-50%, -50%) perspective(800px) rotateX(45deg) rotateY(20deg);
+    animation: morph 8s ease-in-out infinite, rotate3d-about 20s linear infinite;
+    background: linear-gradient(135deg, rgba(74, 242, 255, 0.2), rgba(100, 200, 255, 0.15));
+}
+
+#skills::before{
+    transform: translate(-50%, -50%) perspective(1000px) rotateX(-30deg) rotateZ(45deg);
+    animation: morph 8s ease-in-out infinite 1s, rotate3d-skills 18s linear infinite;
+    background: linear-gradient(135deg, rgba(180, 91, 255, 0.2), rgba(255, 100, 150, 0.15));
+    width: 350px;
+    height: 350px;
+}
+
+#projects::before{
+    transform: translate(-50%, -50%) perspective(600px) rotateY(60deg) rotateX(20deg);
+    animation: morph 8s ease-in-out infinite 2s, rotate3d-projects 22s linear infinite;
+    background: linear-gradient(135deg, rgba(74, 242, 255, 0.18), rgba(180, 91, 255, 0.18));
+    width: 400px;
+    height: 400px;
+}
+
+#journey::before{
+    transform: translate(-50%, -50%) perspective(900px) rotateX(60deg) rotateZ(-30deg);
+    animation: morph 8s ease-in-out infinite 3s, rotate3d-journey 25s linear infinite;
+    background: linear-gradient(135deg, rgba(255, 150, 100, 0.15), rgba(74, 242, 255, 0.15));
+    width: 320px;
+    height: 320px;
+}
+
+#process::before{
+    transform: translate(-50%, -50%) perspective(700px) rotateY(-45deg) rotateX(-40deg);
+    animation: morph 8s ease-in-out infinite 4s, rotate3d-process 19s linear infinite;
+    background: linear-gradient(135deg, rgba(180, 91, 255, 0.2), rgba(100, 255, 200, 0.15));
+    width: 380px;
+    height: 380px;
+}
+
+#contact::before{
+    transform: translate(-50%, -50%) perspective(1200px) rotateX(30deg) rotateY(-50deg) rotateZ(15deg);
+    animation: morph 8s ease-in-out infinite 5s, rotate3d-contact 21s linear infinite;
+    background: linear-gradient(135deg, rgba(74, 242, 255, 0.25), rgba(180, 91, 255, 0.2));
+    width: 360px;
+    height: 360px;
 }
 
 .section.soft-dark{
@@ -1114,5 +1184,104 @@ main{
     to {
         opacity: 0;
         transform: scale(0.3);
+    }
+}
+
+@keyframes morph {
+    0%, 100% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+    25% {
+        border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+    }
+    50% {
+        border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+    }
+    75% {
+        border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+    }
+}
+
+@keyframes rotate3d {
+    0% {
+        transform: translate(-50%, -50%) perspective(800px) rotateX(0deg) rotateY(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) perspective(800px) rotateX(360deg) rotateY(360deg);
+    }
+}
+
+@keyframes rotate3d-about {
+    0% {
+        transform: translate(-50%, -50%) perspective(800px) rotateX(45deg) rotateY(20deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) perspective(800px) rotateX(45deg) rotateY(200deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) perspective(800px) rotateX(45deg) rotateY(380deg);
+    }
+}
+
+@keyframes rotate3d-skills {
+    0% {
+        transform: translate(-50%, -50%) perspective(1000px) rotateX(-30deg) rotateZ(45deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) perspective(1000px) rotateX(-30deg) rotateZ(225deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) perspective(1000px) rotateX(-30deg) rotateZ(405deg);
+    }
+}
+
+@keyframes rotate3d-projects {
+    0% {
+        transform: translate(-50%, -50%) perspective(600px) rotateY(60deg) rotateX(20deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) perspective(600px) rotateY(240deg) rotateX(20deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) perspective(600px) rotateY(420deg) rotateX(20deg);
+    }
+}
+
+@keyframes rotate3d-journey {
+    0% {
+        transform: translate(-50%, -50%) perspective(900px) rotateX(60deg) rotateZ(-30deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) perspective(900px) rotateX(60deg) rotateZ(150deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) perspective(900px) rotateX(60deg) rotateZ(330deg);
+    }
+}
+
+@keyframes rotate3d-process {
+    0% {
+        transform: translate(-50%, -50%) perspective(700px) rotateY(-45deg) rotateX(-40deg);
+    }
+    50% {
+        transform: translate(-50%, -50%) perspective(700px) rotateY(135deg) rotateX(-40deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) perspective(700px) rotateY(315deg) rotateX(-40deg);
+    }
+}
+
+@keyframes rotate3d-contact {
+    0% {
+        transform: translate(-50%, -50%) perspective(1200px) rotateX(30deg) rotateY(-50deg) rotateZ(15deg);
+    }
+    33% {
+        transform: translate(-50%, -50%) perspective(1200px) rotateX(30deg) rotateY(70deg) rotateZ(15deg);
+    }
+    66% {
+        transform: translate(-50%, -50%) perspective(1200px) rotateX(30deg) rotateY(190deg) rotateZ(15deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) perspective(1200px) rotateX(30deg) rotateY(310deg) rotateZ(15deg);
     }
 }
