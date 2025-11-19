@@ -397,6 +397,8 @@ main{
 .section-heading{
     max-width: 720px;
     margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
 }
 
 .section-heading h2{
@@ -423,6 +425,14 @@ main{
     background-color: rgba(255,255,255,0.05);
     padding: 0.85rem 1rem;
     border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.about-list li:hover{
+    background-color: rgba(74, 242, 255, 0.1);
+    border-color: rgba(74, 242, 255, 0.3);
+    transform: translateX(8px);
 }
 
 .skill-grid{
@@ -438,6 +448,20 @@ main{
     border-radius: 18px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     min-height: 230px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.skill-card:nth-child(1) { animation-delay: 0.1s; }
+.skill-card:nth-child(2) { animation-delay: 0.2s; }
+.skill-card:nth-child(3) { animation-delay: 0.3s; }
+
+.skill-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(74, 242, 255, 0.25);
+    border-color: rgba(74, 242, 255, 0.3);
 }
 
 .skill-card h3{
@@ -460,6 +484,14 @@ main{
     border-radius: 999px;
     background: rgba(255,255,255,0.08);
     font-size: 0.85rem;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.chip:hover{
+    background: rgba(74, 242, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(74, 242, 255, 0.3);
 }
 
 .project-grid{
@@ -478,6 +510,30 @@ main{
     flex-direction: column;
     gap: 1rem;
     min-height: 260px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 242, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.project-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 35px 60px rgba(74, 242, 255, 0.2);
+    border-color: rgba(74, 242, 255, 0.4);
+}
+
+.project-card:hover::before{
+    left: 100%;
 }
 
 .project-tag{
@@ -507,6 +563,29 @@ main{
     padding: 0;
     background: none;
     color: #4af2ff;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.btn.text::after{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #4af2ff, #b45bff);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.btn.text:hover{
+    color: #b45bff;
+}
+
+.btn.text:hover::after{
+    transform: scaleX(1);
 }
 
 .icon-link{
@@ -590,6 +669,14 @@ main{
     border-radius: 18px;
     padding: 1.5rem;
     box-shadow: 0 18px 30px rgba(0,0,0,0.25);
+    transition: all 0.4s ease;
+}
+
+.timeline-card:hover{
+    transform: translateX(10px);
+    background: rgba(10,15,32,0.95);
+    border-color: rgba(74, 242, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(74, 242, 255, 0.15);
 }
 
 .timeline-year{
@@ -664,6 +751,13 @@ main{
     border-radius: 20px;
     padding: 1.5rem;
     box-shadow: 0 20px 30px rgba(0,0,0,0.25);
+    transition: all 0.4s ease;
+}
+
+.testimonial-card:hover{
+    transform: scale(1.03);
+    box-shadow: 0 25px 50px rgba(180, 91, 255, 0.2);
+    border-color: rgba(180, 91, 255, 0.3);
 }
 
 .testimonial-card .quote{
@@ -715,6 +809,7 @@ main{
     border-radius: 12px;
     padding: 0.85rem 1rem;
     font-family: inherit;
+    transition: all 0.3s ease;
 }
 
 .contact-form input:focus,
@@ -801,4 +896,37 @@ main{
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(6px); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
