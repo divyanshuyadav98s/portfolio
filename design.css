@@ -70,31 +70,6 @@ html, body{
     gap: 6px; 
   
 }
-#nev h2{
-    font-weight: 500;
-    font-size: 25px;
-    color: rgba(253, 254, 255, 0.85);
-    border: 2px solid #748584e5;
-    padding: 4px 12px;
-    border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.099);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-#nev i{
-    font-size: 25px;
-    color: rgba(253, 254, 255, 0.85);
-    border: 2px solid #748584e5;
-    padding: 4px;
-    border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.099);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-#nev h2:hover,
-#nev i:hover{
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 255, 255, 0.35);
-}
 
 
 #nav-links{
