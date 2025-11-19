@@ -12,6 +12,48 @@ html, body{
     color: #f5f6ff;
     font-family: "Space Grotesk", "Segoe UI", system-ui;
     scroll-behavior: smooth;
+    cursor: none;
+}
+
+.cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(74, 242, 255, 0.8);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.15s ease;
+    mix-blend-mode: screen;
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(74, 242, 255, 1);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    box-shadow: 0 0 15px rgba(74, 242, 255, 0.8);
+}
+
+.cursor.hover {
+    width: 40px;
+    height: 40px;
+    border-color: rgba(180, 91, 255, 0.8);
+    background: rgba(180, 91, 255, 0.1);
+}
+
+.cursor-trail {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(74, 242, 255, 0.6), rgba(180, 91, 255, 0.4));
+    pointer-events: none;
+    z-index: 9998;
+    animation: fadeOut 0.8s ease-out forwards;
 }
 #bg {
     background-size: cover;
@@ -928,5 +970,16 @@ main{
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.3);
     }
 }

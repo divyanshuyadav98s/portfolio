@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="design.css" />
   </head>
   <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
     <header class="page" id="home">
       <div id="nev">
         <div id="nevpart1"></div>
@@ -393,6 +397,66 @@
     </footer>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Custom Cursor Animation
+      const cursor = document.querySelector('.cursor');
+      const cursorDot = document.querySelector('.cursor-dot');
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
+      let dotX = 0, dotY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        // Instant dot position
+        dotX = mouseX;
+        dotY = mouseY;
+        cursorDot.style.left = dotX + 'px';
+        cursorDot.style.top = dotY + 'px';
+
+        // Create trail effect
+        if (Math.random() > 0.7) {
+          createTrail(mouseX, mouseY);
+        }
+      });
+
+      // Smooth cursor ring follow
+      function animateCursor() {
+        const speed = 0.15;
+        cursorX += (mouseX - cursorX) * speed;
+        cursorY += (mouseY - cursorY) * speed;
+        
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // Create trail particles
+      function createTrail(x, y) {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.style.left = x + 'px';
+        trail.style.top = y + 'px';
+        document.body.appendChild(trail);
+        
+        setTimeout(() => {
+          trail.remove();
+        }, 800);
+      }
+
+      // Hover effect on interactive elements
+      const interactiveElements = document.querySelectorAll('a, button, .btn, .chip, .project-card, .skill-card');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('hover');
+        });
+      });
 
       // Smooth scroll behavior for navigation links
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
