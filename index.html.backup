@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Divyanshu Yadav - Creative Frontend Developer crafting immersive, animated web experiences with modern technologies."
+    />
+    <meta
+      name="keywords"
+      content="frontend developer, web developer, UI/UX designer, portfolio, React, Next.js, GSAP, WebGL"
+    />
+    <meta name="author" content="Divyanshu Yadav" />
+    <title>Divyanshu Yadav | Creative Frontend Developer</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="design.css" />
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <header class="page" id="home">
+      <div id="nev">
+        <div id="nevpart1"></div>
+        <nav id="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#experience">Journey</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <a class="btn ghost small" href="#contact">Hire Me</a>
+      </div>
+
+      <div id="hero-card" class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Creative Developer</p>
+          <h1><i>Hi, I'm Divyanshu</i></h1>
+          <p class="hero-subtitle">
+            I craft immersive, animated web experiences that feel alive and
+            meaningful. Always pushing pixels, code, and imagination.
+          </p>
+          <div class="hero-cta">
+            <a class="btn primary" href="#projects">View Projects</a>
+            <a class="btn ghost" href="#contact">Let's Talk</a>
+          </div>
+          <ul class="hero-stats" aria-label="Impact metrics">
+            <li>
+              <strong>35+</strong>
+              <span>Interfaces shipped</span>
+            </li>
+            <li>
+              <strong>12</strong>
+              <span>Brands collaborated</span>
+            </li>
+            <li>
+              <strong>5.0</strong>
+              <span>Avg. client rating</span>
+            </li>
+          </ul>
+          <div class="hero-socials" aria-label="Social links">
+            <a href="#" aria-label="LinkedIn"
+              ><i class="ri-linkedin-fill"></i
+            ></a>
+            <a href="#" aria-label="GitHub"><i class="ri-github-fill"></i></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="ri-instagram-line"></i
+            ></a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-1"></div>
+          <div class="orbit orbit-2"></div>
+          <div class="orbit orbit-3"></div>
+          <div class="planet"></div>
+          <div class="hero-scanlines"></div>
+          <div class="floating-card">
+            <p>Currently building</p>
+            <strong>Immersive Web Systems</strong>
+            <span>Q4 · Stealth fintech</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <i class="ri-arrow-down-line" aria-hidden="true"></i>
+      </div>
+    </header>
+
+    <main>
+      <!-- Floating Tesseract Cube -->
+      <div class="floating-tesseract"></div>
+      
+      <section id="about" class="section cube-right">
+        <div class="section-content">
+        <div class="section-heading">
+          <p class="eyebrow">About</p>
+          <h2>The story behind the pixels.</h2>
+        </div>
+        <div class="about-grid">
+          <p>
+            I'm a front-end engineer obsessed with motion, thoughtful
+            typography, and atmospheric worlds. With a mix of design sense and
+            JavaScript craft, I build responsive experiences that guide users
+            with subtle micro-interactions and cinematic mood.
+          </p>
+          <ul class="about-list">
+            <li>⚡ 3+ years turning concepts into polished products</li>
+            <li>🎨 Strong eye for color, contrast, and storytelling</li>
+            <li>🛰️ Currently exploring WebGL + shader art</li>
+          </ul>
+        </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section soft-dark cube-left">
+        <div class="section-content">
+        <div class="section-heading">
+          <p class="eyebrow">Skills</p>
+          <h2>Tools I rely on daily.</h2>
+        </div>
+        <div class="skill-grid">
+          <article class="skill-card">
+            <h3>Frontend Core</h3>
+            <p>Semantic HTML, modern CSS, responsive layouts, accessibility.</p>
+            <div class="chip-row">
+              <span class="chip">HTML5</span>
+              <span class="chip">CSS3</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">TypeScript</span>
+            </div>
+          </article>
+          <article class="skill-card">
+            <h3>Frameworks</h3>
+            <p>Reusable component libraries and high-performance SPA builds.</p>
+            <div class="chip-row">
+              <span class="chip">React</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">Vue</span>
+              <span class="chip">GSAP</span>
+            </div>
+          </article>
+          <article class="skill-card">
+            <h3>Visual Craft</h3>
+            <p>Brand systems, interface polish, and motion-first narratives.</p>
+            <div class="chip-row">
+              <span class="chip">Figma</span>
+              <span class="chip">Framer</span>
+              <span class="chip">Spline</span>
+              <span class="chip">After Effects</span>
+            </div>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section cube-right">
+        <div class="section-content">
+        <div class="section-heading">
+          <p class="eyebrow">Projects</p>
+          <h2>Selected work that feels alive.</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-tag">Featured</div>
+            <h3>Nebula Commerce</h3>
+            <p>
+              Luxury e-commerce concept with tactile haptics, scroll-driven
+              storytelling, and delight-first checkout.
+            </p>
+            <div class="project-actions">
+              <a href="#" class="btn text">Case Study</a>
+              <a href="#" class="icon-link" aria-label="Open project"
+                ><i class="ri-external-link-line"></i
+              ></a>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-tag">Client</div>
+            <h3>Pulse Studio</h3>
+            <p>
+              Portfolio for a sound design duo combining ambient gradients,
+              reactive visuals, and contact capture.
+            </p>
+            <div class="project-actions">
+              <a href="#" class="btn text">See Live</a>
+              <a href="#" class="icon-link" aria-label="Open project"
+                ><i class="ri-external-link-line"></i
+              ></a>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-tag">Lab</div>
+            <h3>Orbit Atlas</h3>
+            <p>
+              Experimental WebGL data map visualizing satellites with layered
+              depth cues and playful camera work.
+            </p>
+            <div class="project-actions">
+              <a href="#" class="btn text">Prototype</a>
+              <a href="#" class="icon-link" aria-label="Open project"
+                ><i class="ri-external-link-line"></i
+              ></a>
+            </div>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section gradient-panel cube-left">
+        <div class="section-content">
+      <section id="projects" class="section gradient-panel cube-right">
+        <div class="section-content">
+        <div class="section-heading">
+          <p class="eyebrow">Journey</p>
+          <h2>Orbiting through roles and realms.</h2>
+        </div>
+        <ol class="timeline">
+          <li>
+            <div class="timeline-dot"></div>
+            <article class="timeline-card">
+              <span class="timeline-year">2024 — Present</span>
+              <h3>Lead Frontend · Nova Labs</h3>
+              <p>
+                Prototyping volumetric dashboards, shipping DX tooling, and
+                coaching a squad of motion-minded engineers.
+              </p>
+              <div class="timeline-tags">
+                <span>Next.js</span><span>GSAP</span><span>WebGL</span>
+              </div>
+            </article>
+          </li>
+          <li>
+            <div class="timeline-dot"></div>
+            <article class="timeline-card">
+              <span class="timeline-year">2022 — 2024</span>
+              <h3>Senior UI Engineer · Pulse Studio</h3>
+              <p>
+                Crafted immersive marketing sites with layered storytelling,
+                leading concept-to-launch across 8 international clients.
+              </p>
+              <div class="timeline-tags">
+                <span>Three.js</span><span>Framer</span><span>Storybook</span>
+              </div>
+            </article>
+          </li>
+          <li>
+            <div class="timeline-dot"></div>
+            <article class="timeline-card">
+              <span class="timeline-year">2019 — 2022</span>
+              <h3>Product Designer · Orbit Collective</h3>
+              <p>
+                Balanced research, UX, and prototyping to launch community
+                platforms with rich identity systems.
+              </p>
+              <div class="timeline-tags">
+                <span>Figma</span><span>ProtoPie</span><span>Analytics</span>
+              </div>
+            </article>
+          </div>
+        </ul>
+        </div>
+      </section>
+
+      <section id="process" class="section cube-right">
+        <div class="section-content">
+        <div class="section-heading">
+          <p class="eyebrow">Process</p>
+          <h2>A luminous pipeline from spark to launch.</h2>
+        </div>
+        <div class="process-grid">
+          <article class="process-card">
+            <span class="step">01</span>
+            <h3>Discover</h3>
+            <p>
+              Collaborative workshops, product mapping, and defining the story
+              arc users should feel.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step">02</span>
+            <h3>Design</h3>
+            <p>
+              Style exploration, kinetic prototypes, accessibility sweeps, and
+              design systems.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step">03</span>
+            <h3>Build</h3>
+            <p>
+              Component engineering, animation polish, performance budgets,
+              iterative QA.
+            </p>
+          </article>
+          <article class="process-card">
+            <span class="step">04</span>
+            <h3>Launch + Grow</h3>
+            <p>
+              Ship, observe, and optimize with progressive enhancements and
+              insight-led updates.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="testimonials" class="section soft-dark">
+        <div class="section-heading">
+          <p class="eyebrow">Testimonials</p>
+          <h2>Partners describing the experience.</h2>
+        </div>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <p class="quote">
+              “Divyanshu captured the soul of our brand and wrapped it in
+              delightful micro-moments that users can’t stop talking about.”
+            </p>
+            <div class="author">
+              <span class="avatar">AR</span>
+              <div>
+                <strong>Aarav Rao</strong>
+                <span>Founder · Pulse Studio</span>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <p class="quote">
+              “From kickoff to launch, he translated strategy into expressive
+              visuals and code. Every release felt cinematic.”
+            </p>
+            <div class="author">
+              <span class="avatar">LS</span>
+              <div>
+                <strong>Leah Singh</strong>
+                <span>Creative Director · Orbit Collective</span>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card">
+            <p class="quote">
+              “He blends rigor with experimentation: performance targets met,
+              innovation unlocked, team inspired.”
+            </p>
+            <div class="author">
+              <span class="avatar">KM</span>
+              <div>
+                <strong>Kai Mehta</strong>
+                <span>CTO · Nova Labs</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        </div>
+      </section>
+
+      <section id="journey" class="section soft-dark cube-left">
+        <div class="section-content">
+        <div class="section-heading">
+          <p class="eyebrow">Contact</p>
+          <h2>Let's create something bold together.</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Available for freelance & full-time roles.</h3>
+            <p>
+              Drop a quick line through the form or reach out via email—I'll
+              respond within 24 hours.
+            </p>
+            <ul>
+              <li><i class="ri-mail-line"></i> hello@manu.dev</li>
+              <li><i class="ri-map-pin-line"></i> Remote · GMT+5:30</li>
+              <li><i class="ri-timer-line"></i> Reply time &lt; 1 day</li>
+            </ul>
+          </div>
+          <form class="contact-form">
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" required />
+            </label>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                placeholder="you@email.com"
+                required
+              />
+            </label>
+            <label>
+              Project details
+              <textarea
+                name="message"
+                rows="4"
+                placeholder="Tell me about your idea"
+                required
+              ></textarea>
+            </label>
+            <button type="submit" class="btn primary full">Send Message</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Manu Divyanshu · Crafted with curiosity.</p>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Custom Cursor Animation
+      const cursor = document.querySelector(".cursor");
+      const cursorDot = document.querySelector(".cursor-dot");
+      let mouseX = 0,
+        mouseY = 0;
+      let cursorX = 0,
+        cursorY = 0;
+      let dotX = 0,
+        dotY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        // Instant dot position
+        dotX = mouseX;
+        dotY = mouseY;
+        cursorDot.style.left = dotX + "px";
+        cursorDot.style.top = dotY + "px";
+
+        // Create trail effect
+        if (Math.random() > 0.7) {
+          createTrail(mouseX, mouseY);
+        }
+      });
+
+      // Smooth cursor ring follow
+      function animateCursor() {
+        const speed = 0.15;
+        cursorX += (mouseX - cursorX) * speed;
+        cursorY += (mouseY - cursorY) * speed;
+
+        cursor.style.left = cursorX + "px";
+        cursor.style.top = cursorY + "px";
+
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // Create trail particles
+      function createTrail(x, y) {
+        const trail = document.createElement("div");
+        trail.className = "cursor-trail";
+        trail.style.left = x + "px";
+        trail.style.top = y + "px";
+        document.body.appendChild(trail);
+
+        setTimeout(() => {
+          trail.remove();
+        }, 800);
+      }
+
+      // Hover effect on interactive elements
+      const interactiveElements = document.querySelectorAll(
+        "a, button, .btn, .chip, .project-card, .skill-card"
+      );
+      interactiveElements.forEach((el) => {
+        el.addEventListener("mouseenter", () => {
+          cursor.classList.add("hover");
+        });
+        el.addEventListener("mouseleave", () => {
+          cursor.classList.remove("hover");
+        });
+      });
+
+      // Smooth scroll behavior for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Intersection Observer for scroll-triggered animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections and cards
+      document
+        .querySelectorAll(".section, .project-card, .process-card, .about-grid")
+        .forEach((el) => {
+          observer.observe(el);
+        });
+
+      // Parallax effect for hero visual
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const heroVisual = document.querySelector(".hero-visual");
+        if (heroVisual && scrolled < window.innerHeight) {
+          heroVisual.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
+      });
+
+      // Form submission handler
+      const contactForm = document.querySelector(".contact-form");
+      if (contactForm) {
+        contactForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const btn = contactForm.querySelector('button[type="submit"]');
+          const originalText = btn.textContent;
+          btn.textContent = "Sending...";
+          btn.disabled = true;
+
+          // Simulate form submission (replace with actual API call)
+          setTimeout(() => {
+            btn.textContent = "✓ Message Sent!";
+            contactForm.reset();
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.disabled = false;
+            }, 2000);
+          }, 1500);
+        });
+      }
+
+      // 3D Tesseract (Hypercube) Interactive System
+      const sections = document.querySelectorAll(".section");
+      let tesseractMouseX = 0,
+        tesseractMouseY = 0;
+      let currentMouseX = 0,
+        currentMouseY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        tesseractMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        tesseractMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      function animateTesseract() {
+        currentMouseX += (tesseractMouseX - currentMouseX) * 0.05;
+        currentMouseY += (tesseractMouseY - currentMouseY) * 0.05;
+
+        sections.forEach((section, index) => {
+          const tesseract = section.querySelector("::before");
+          if (section.id) {
+            const rotX = currentMouseY * 30 + index * 15;
+            const rotY = currentMouseX * 30 + index * 20;
+            const rotZ = (currentMouseX + currentMouseY) * 15;
+
+            section.style.setProperty("--mouse-x", currentMouseX);
+            section.style.setProperty("--mouse-y", currentMouseY);
+            section.style.setProperty("--rot-x", `${rotX}deg`);
+            section.style.setProperty("--rot-y", `${rotY}deg`);
+            section.style.setProperty("--rot-z", `${rotZ}deg`);
+          }
+        });
+
+        requestAnimationFrame(animateTesseract);
+      }
+
+      animateTesseract();
+
+      // Particle explosion on click
+      sections.forEach((section) => {
+        section.addEventListener("click", (e) => {
+          if (e.target.closest("a, button, .btn")) return;
+
+          const rect = section.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          for (let i = 0; i < 20; i++) {
+            const particle = document.createElement("div");
+            particle.className = "tesseract-particle";
+            particle.style.left = x + "px";
+            particle.style.top = y + "px";
+            particle.style.setProperty("--angle", Math.random() * 360 + "deg");
+            particle.style.setProperty(
+              "--distance",
+              Math.random() * 200 + 100 + "px"
+            );
+            particle.style.setProperty(
+              "--duration",
+              Math.random() * 0.5 + 0.5 + "s"
+            );
+            section.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 1000);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

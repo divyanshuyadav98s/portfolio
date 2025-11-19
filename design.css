@@ -486,6 +486,80 @@ main{
     background-color: rgba(3,7,18,0.85);
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.section-content {
+    max-width: 55%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+}
+
+.section.cube-right .section-content {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.section.cube-left .section-content {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.floating-tesseract {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    transform-style: preserve-3d;
+    pointer-events: none;
+    z-index: 5;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.floating-tesseract::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%) 
+               perspective(1000px) 
+               rotateX(calc(var(--mouse-y, 0) * 30deg)) 
+               rotateY(calc(var(--mouse-x, 0) * 30deg));
+    transform-style: preserve-3d;
+    border: 3px solid rgba(74, 242, 255, 0.6);
+    background: transparent;
+    box-shadow: 
+        0 0 100px rgba(74, 242, 255, 0.3),
+        20px 20px 0 rgba(74, 242, 255, 0.15),
+        -20px -20px 0 rgba(180, 91, 255, 0.15);
+    animation: cube-rotate 10s linear infinite;
+}
+
+.floating-tesseract::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    transform: translate(-50%, -50%) 
+               perspective(1000px) 
+               rotateX(calc(var(--mouse-y, 0) * -30deg)) 
+               rotateY(calc(var(--mouse-x, 0) * -30deg))
+               translateZ(-80px);
+    transform-style: preserve-3d;
+    border: 2px solid rgba(180, 91, 255, 0.7);
+    background: transparent;
+    box-shadow: 
+        0 0 80px rgba(180, 91, 255, 0.4),
+        inset 0 0 60px rgba(180, 91, 255, 0.2);
+    animation: cube-rotate 10s linear infinite reverse;
 }
 
 .section::before{
@@ -1291,6 +1365,13 @@ main{
     }
     .hero-visual{
         margin: 0 auto;
+    }
+    .floating-tesseract{
+        display: none;
+    }
+    .section-content{
+        max-width: 100% !important;
+        margin: 0 auto !important;
     }
 }
 @keyframes pan-bg {
