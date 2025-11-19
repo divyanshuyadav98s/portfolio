@@ -588,7 +588,7 @@
 
         if (currentSection && floatingTesseract) {
           const isRight = currentSection.classList.contains("cube-right");
-          
+
           if (isRight) {
             floatingTesseract.style.right = "5%";
             floatingTesseract.style.left = "auto";
@@ -613,7 +613,7 @@
 
       animateTesseract();
       updateTesseractPosition();
-      
+
       window.addEventListener("scroll", updateTesseractPosition);
       window.addEventListener("resize", updateTesseractPosition);
 

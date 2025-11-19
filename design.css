@@ -510,16 +510,18 @@ main{
 
 .floating-tesseract {
     position: fixed;
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     transform-style: preserve-3d;
-    pointer-events: none;
+    pointer-events: all;
     z-index: 5;
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     top: 50%;
     transform: translateY(-50%);
+    cursor: pointer;
 }
 
+/* Outer Cube */
 .floating-tesseract::before {
     content: "";
     position: absolute;
@@ -528,38 +530,54 @@ main{
     width: 100%;
     height: 100%;
     transform: translate(-50%, -50%) 
-               perspective(1000px) 
-               rotateX(calc(var(--mouse-y, 0) * 30deg)) 
-               rotateY(calc(var(--mouse-x, 0) * 30deg));
+               rotateX(calc(25deg + var(--mouse-y, 0) * 20deg)) 
+               rotateY(calc(35deg + var(--mouse-x, 0) * 20deg));
     transform-style: preserve-3d;
-    border: 3px solid rgba(74, 242, 255, 0.6);
+    border: 2px solid rgba(74, 242, 255, 0.8);
     background: transparent;
     box-shadow: 
-        0 0 100px rgba(74, 242, 255, 0.3),
-        20px 20px 0 rgba(74, 242, 255, 0.15),
-        -20px -20px 0 rgba(180, 91, 255, 0.15);
-    animation: cube-rotate 10s linear infinite;
+        0 0 40px rgba(74, 242, 255, 0.4),
+        0 0 80px rgba(74, 242, 255, 0.2);
+    animation: cube-float 4s ease-in-out infinite;
 }
 
+/* Inner Cube */
 .floating-tesseract::after {
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 60%;
     transform: translate(-50%, -50%) 
-               perspective(1000px) 
-               rotateX(calc(var(--mouse-y, 0) * -30deg)) 
-               rotateY(calc(var(--mouse-x, 0) * -30deg))
-               translateZ(-80px);
+               rotateX(calc(25deg - var(--mouse-y, 0) * 20deg)) 
+               rotateY(calc(35deg - var(--mouse-x, 0) * 20deg));
     transform-style: preserve-3d;
-    border: 2px solid rgba(180, 91, 255, 0.7);
+    border: 2px solid rgba(180, 91, 255, 0.9);
     background: transparent;
     box-shadow: 
-        0 0 80px rgba(180, 91, 255, 0.4),
-        inset 0 0 60px rgba(180, 91, 255, 0.2);
-    animation: cube-rotate 10s linear infinite reverse;
+        0 0 30px rgba(180, 91, 255, 0.5),
+        0 0 60px rgba(180, 91, 255, 0.3),
+        inset 0 0 40px rgba(180, 91, 255, 0.2);
+    animation: cube-float 4s ease-in-out infinite reverse;
+}
+
+/* Create 3D cube faces using box-shadow */
+.floating-tesseract::before,
+.floating-tesseract::after {
+    box-shadow: 
+        /* Front glow */
+        0 0 40px rgba(74, 242, 255, 0.3),
+        /* Top face */
+        0 -150px 0 -148px rgba(74, 242, 255, 0.6),
+        /* Bottom face */
+        0 150px 0 -148px rgba(74, 242, 255, 0.6),
+        /* Left face */
+        -150px 0 0 -148px rgba(180, 91, 255, 0.6),
+        /* Right face */
+        150px 0 0 -148px rgba(180, 91, 255, 0.6),
+        /* Connecting edges glow */
+        0 0 80px rgba(74, 242, 255, 0.2);
 }
 
 .section::before{
@@ -1705,5 +1723,18 @@ main{
     }
     100% {
         transform: translate(-50%, -50%) rotateY(360deg) rotateX(360deg);
+    }
+}
+
+@keyframes cube-float {
+    0%, 100% {
+        transform: translate(-50%, -50%) 
+                   rotateX(calc(25deg + var(--mouse-y, 0) * 20deg)) 
+                   rotateY(calc(35deg + var(--mouse-x, 0) * 20deg))\n                   translateZ(0px);
+    }
+    50% {
+        transform: translate(-50%, -50%) 
+                   rotateX(calc(25deg + var(--mouse-y, 0) * 20deg)) 
+                   rotateY(calc(35deg + var(--mouse-x, 0) * 20deg))\n                   translateZ(20px);
     }
 }
