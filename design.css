@@ -469,15 +469,12 @@ main{
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 300px;
-    height: 300px;
-    background: linear-gradient(135deg, rgba(74, 242, 255, 0.15), rgba(180, 91, 255, 0.15));
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    animation: morph 8s ease-in-out infinite, rotate3d 20s linear infinite;
+    width: 400px;
+    height: 400px;
     transform-style: preserve-3d;
     pointer-events: none;
-    filter: blur(40px);
     z-index: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section > *{
@@ -487,49 +484,142 @@ main{
 
 /* Different perspectives for each section */
 #about::before{
-    transform: translate(-50%, -50%) perspective(800px) rotateX(45deg) rotateY(20deg);
-    animation: morph 8s ease-in-out infinite, rotate3d-about 20s linear infinite;
-    background: linear-gradient(135deg, rgba(74, 242, 255, 0.2), rgba(100, 200, 255, 0.15));
+    background: 
+        conic-gradient(from 0deg at 50% 50%, 
+            transparent 0deg, 
+            rgba(74, 242, 255, 0.4) 90deg,
+            transparent 180deg,
+            rgba(100, 200, 255, 0.3) 270deg,
+            transparent 360deg),
+        linear-gradient(135deg, rgba(74, 242, 255, 0.2), rgba(100, 200, 255, 0.1));
+    box-shadow: 
+        0 0 80px rgba(74, 242, 255, 0.6),
+        inset 0 0 80px rgba(74, 242, 255, 0.3),
+        0 0 120px rgba(100, 200, 255, 0.4);
+    animation: tesseract-about 3s ease-in-out infinite, pulse-glow 2s ease-in-out infinite alternate;
+    transform: translate(-50%, -50%) 
+               perspective(1000px) 
+               rotateX(calc(var(--mouse-y, 0) * 45deg + 45deg)) 
+               rotateY(calc(var(--mouse-x, 0) * 45deg + 20deg))
+               rotateZ(calc(var(--mouse-x, 0) * 10deg));
+    filter: drop-shadow(0 0 40px rgba(74, 242, 255, 0.8));
 }
 
 #skills::before{
-    transform: translate(-50%, -50%) perspective(1000px) rotateX(-30deg) rotateZ(45deg);
-    animation: morph 8s ease-in-out infinite 1s, rotate3d-skills 18s linear infinite;
-    background: linear-gradient(135deg, rgba(180, 91, 255, 0.2), rgba(255, 100, 150, 0.15));
-    width: 350px;
-    height: 350px;
+    background: 
+        repeating-conic-gradient(from 45deg at 50% 50%,
+            rgba(180, 91, 255, 0.5) 0deg 30deg,
+            transparent 30deg 60deg,
+            rgba(255, 100, 150, 0.4) 60deg 90deg,
+            transparent 90deg 120deg),
+        radial-gradient(circle at 50% 50%, rgba(180, 91, 255, 0.3), transparent 70%);
+    box-shadow: 
+        0 0 100px rgba(180, 91, 255, 0.8),
+        inset 0 0 100px rgba(180, 91, 255, 0.4),
+        0 0 150px rgba(255, 100, 150, 0.5);
+    animation: tesseract-skills 3.5s ease-in-out infinite, pulse-glow 2.2s ease-in-out infinite alternate;
+    transform: translate(-50%, -50%) 
+               perspective(1200px) 
+               rotateX(calc(var(--mouse-y, 0) * -40deg - 30deg)) 
+               rotateY(calc(var(--mouse-x, 0) * 40deg))
+               rotateZ(calc(var(--mouse-x, 0) * 20deg + 45deg));
+    width: 420px;
+    height: 420px;
+    filter: drop-shadow(0 0 50px rgba(180, 91, 255, 0.9));
 }
 
 #projects::before{
-    transform: translate(-50%, -50%) perspective(600px) rotateY(60deg) rotateX(20deg);
-    animation: morph 8s ease-in-out infinite 2s, rotate3d-projects 22s linear infinite;
-    background: linear-gradient(135deg, rgba(74, 242, 255, 0.18), rgba(180, 91, 255, 0.18));
-    width: 400px;
-    height: 400px;
+    background: 
+        linear-gradient(45deg, transparent 40%, rgba(74, 242, 255, 0.5) 50%, transparent 60%),
+        linear-gradient(-45deg, transparent 40%, rgba(180, 91, 255, 0.5) 50%, transparent 60%),
+        radial-gradient(circle at 30% 30%, rgba(74, 242, 255, 0.4), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(180, 91, 255, 0.4), transparent 50%);
+    box-shadow: 
+        0 0 120px rgba(74, 242, 255, 0.7),
+        inset 0 0 120px rgba(180, 91, 255, 0.3),
+        0 0 180px rgba(100, 150, 255, 0.6);
+    animation: tesseract-projects 4s ease-in-out infinite, pulse-glow 1.8s ease-in-out infinite alternate;
+    transform: translate(-50%, -50%) 
+               perspective(800px) 
+               rotateY(calc(var(--mouse-x, 0) * 60deg + 60deg)) 
+               rotateX(calc(var(--mouse-y, 0) * 30deg + 20deg))
+               rotateZ(calc((var(--mouse-x, 0) + var(--mouse-y, 0)) * 15deg));
+    width: 450px;
+    height: 450px;
+    filter: drop-shadow(0 0 60px rgba(74, 242, 255, 0.9));
 }
 
 #journey::before{
-    transform: translate(-50%, -50%) perspective(900px) rotateX(60deg) rotateZ(-30deg);
-    animation: morph 8s ease-in-out infinite 3s, rotate3d-journey 25s linear infinite;
-    background: linear-gradient(135deg, rgba(255, 150, 100, 0.15), rgba(74, 242, 255, 0.15));
-    width: 320px;
-    height: 320px;
+    background: 
+        conic-gradient(from 180deg at 50% 50%,
+            rgba(255, 150, 100, 0.4) 0deg,
+            rgba(74, 242, 255, 0.4) 120deg,
+            rgba(180, 91, 255, 0.4) 240deg,
+            rgba(255, 150, 100, 0.4) 360deg),
+        radial-gradient(ellipse at 50% 50%, rgba(255, 150, 100, 0.3), transparent 60%);
+    box-shadow: 
+        0 0 90px rgba(255, 150, 100, 0.7),
+        inset 0 0 90px rgba(74, 242, 255, 0.4),
+        0 0 140px rgba(180, 91, 255, 0.5);
+    animation: tesseract-journey 3.2s ease-in-out infinite, pulse-glow 2.5s ease-in-out infinite alternate;
+    transform: translate(-50%, -50%) 
+               perspective(1100px) 
+               rotateX(calc(var(--mouse-y, 0) * 70deg + 60deg)) 
+               rotateY(calc(var(--mouse-x, 0) * -30deg))
+               rotateZ(calc(var(--mouse-y, 0) * -25deg - 30deg));
+    width: 380px;
+    height: 380px;
+    filter: drop-shadow(0 0 45px rgba(255, 150, 100, 0.8));
 }
 
 #process::before{
-    transform: translate(-50%, -50%) perspective(700px) rotateY(-45deg) rotateX(-40deg);
-    animation: morph 8s ease-in-out infinite 4s, rotate3d-process 19s linear infinite;
-    background: linear-gradient(135deg, rgba(180, 91, 255, 0.2), rgba(100, 255, 200, 0.15));
-    width: 380px;
-    height: 380px;
+    background: 
+        repeating-linear-gradient(45deg, 
+            transparent, transparent 10px,
+            rgba(180, 91, 255, 0.3) 10px, rgba(180, 91, 255, 0.3) 20px),
+        repeating-linear-gradient(-45deg,
+            transparent, transparent 10px,
+            rgba(100, 255, 200, 0.3) 10px, rgba(100, 255, 200, 0.3) 20px),
+        radial-gradient(circle at 50% 50%, rgba(180, 91, 255, 0.4), transparent 65%);
+    box-shadow: 
+        0 0 110px rgba(180, 91, 255, 0.8),
+        inset 0 0 110px rgba(100, 255, 200, 0.4),
+        0 0 160px rgba(150, 150, 255, 0.6);
+    animation: tesseract-process 2.8s ease-in-out infinite, pulse-glow 2s ease-in-out infinite alternate;
+    transform: translate(-50%, -50%) 
+               perspective(900px) 
+               rotateY(calc(var(--mouse-x, 0) * -55deg - 45deg)) 
+               rotateX(calc(var(--mouse-y, 0) * -50deg - 40deg))
+               rotateZ(calc(var(--mouse-x, 0) * 25deg));
+    width: 430px;
+    height: 430px;
+    filter: drop-shadow(0 0 55px rgba(180, 91, 255, 0.9));
 }
 
 #contact::before{
-    transform: translate(-50%, -50%) perspective(1200px) rotateX(30deg) rotateY(-50deg) rotateZ(15deg);
-    animation: morph 8s ease-in-out infinite 5s, rotate3d-contact 21s linear infinite;
-    background: linear-gradient(135deg, rgba(74, 242, 255, 0.25), rgba(180, 91, 255, 0.2));
-    width: 360px;
-    height: 360px;
+    background: 
+        conic-gradient(from 90deg at 50% 50%,
+            rgba(74, 242, 255, 0.5) 0deg 60deg,
+            rgba(180, 91, 255, 0.5) 60deg 120deg,
+            rgba(255, 100, 200, 0.5) 120deg 180deg,
+            rgba(100, 255, 200, 0.5) 180deg 240deg,
+            rgba(255, 200, 100, 0.5) 240deg 300deg,
+            rgba(74, 242, 255, 0.5) 300deg 360deg),
+        radial-gradient(circle at 50% 50%, rgba(74, 242, 255, 0.4), transparent 55%);
+    box-shadow: 
+        0 0 130px rgba(74, 242, 255, 0.9),
+        inset 0 0 130px rgba(180, 91, 255, 0.5),
+        0 0 200px rgba(150, 200, 255, 0.7),
+        0 0 80px rgba(255, 100, 200, 0.6);
+    animation: tesseract-contact 4.5s ease-in-out infinite, pulse-glow 1.5s ease-in-out infinite alternate;
+    transform: translate(-50%, -50%) 
+               perspective(1300px) 
+               rotateX(calc(var(--mouse-y, 0) * 40deg + 30deg)) 
+               rotateY(calc(var(--mouse-x, 0) * -60deg - 50deg)) 
+               rotateZ(calc((var(--mouse-x, 0) - var(--mouse-y, 0)) * 20deg + 15deg));
+    width: 410px;
+    height: 410px;
+    filter: drop-shadow(0 0 70px rgba(74, 242, 255, 1));
 }
 
 .section.soft-dark{
@@ -1283,5 +1373,132 @@ main{
     }
     100% {
         transform: translate(-50%, -50%) perspective(1200px) rotateX(30deg) rotateY(310deg) rotateZ(15deg);
+    }
+}
+
+@keyframes tesseract-about {
+    0%, 100% {
+        border-radius: 20% 80% 60% 40% / 40% 60% 40% 60%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        border-radius: 60% 40% 30% 70% / 50% 30% 70% 50%;
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+}
+
+@keyframes tesseract-skills {
+    0%, 100% {
+        border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    50% {
+        border-radius: 70% 30% 40% 60% / 30% 70% 30% 70%;
+        transform: translate(-50%, -50%) scale(1.1) rotate(180deg);
+    }
+}
+
+@keyframes tesseract-projects {
+    0%, 100% {
+        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    25% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    50% {
+        border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+    75% {
+        border-radius: 30% 70% 30% 70% / 70% 30% 70% 30%;
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+}
+
+@keyframes tesseract-journey {
+    0%, 100% {
+        border-radius: 60% 40% 40% 60% / 50% 60% 40% 50%;
+        transform: translate(-50%, -50%) scale(1) rotateZ(0deg);
+    }
+    50% {
+        border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+        transform: translate(-50%, -50%) scale(1.12) rotateZ(90deg);
+    }
+}
+
+@keyframes tesseract-process {
+    0%, 100% {
+        border-radius: 35% 65% 55% 45% / 45% 55% 45% 55%;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    33% {
+        border-radius: 55% 45% 35% 65% / 65% 35% 65% 35%;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+    66% {
+        border-radius: 45% 55% 65% 35% / 35% 65% 35% 65%;
+        transform: translate(-50%, -50%) scale(1.18);
+    }
+}
+
+@keyframes tesseract-contact {
+    0%, 100% {
+        border-radius: 50% 50% 30% 70% / 30% 70% 50% 50%;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    20% {
+        border-radius: 70% 30% 50% 50% / 50% 50% 30% 70%;
+        transform: translate(-50%, -50%) scale(1.15) rotate(72deg);
+    }
+    40% {
+        border-radius: 30% 70% 70% 30% / 70% 30% 50% 50%;
+        transform: translate(-50%, -50%) scale(0.95) rotate(144deg);
+    }
+    60% {
+        border-radius: 50% 50% 50% 50% / 50% 50% 70% 30%;
+        transform: translate(-50%, -50%) scale(1.1) rotate(216deg);
+    }
+    80% {
+        border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%;
+        transform: translate(-50%, -50%) scale(1.05) rotate(288deg);
+    }
+}
+
+@keyframes pulse-glow {
+    0% {
+        opacity: 0.7;
+        filter: brightness(1) drop-shadow(0 0 40px currentColor);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1.4) drop-shadow(0 0 80px currentColor);
+    }
+}
+
+.tesseract-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, rgba(74, 242, 255, 1), rgba(180, 91, 255, 0.8));
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particle-explode var(--duration, 0.8s) ease-out forwards;
+    box-shadow: 0 0 20px rgba(74, 242, 255, 0.8), 0 0 40px rgba(180, 91, 255, 0.6);
+    z-index: 100;
+}
+
+@keyframes particle-explode {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(
+            calc(cos(var(--angle, 0deg)) * var(--distance, 150px)),
+            calc(sin(var(--angle, 0deg)) * var(--distance, 150px))
+        ) scale(0);
+        opacity: 0;
     }
 }
