@@ -199,7 +199,26 @@ body.hovering .cursor-dot {
   transition: transform 0.5s ease-out;
 }
 
-/* Text Styles for Readability */
-.hero-title {
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Subtle shadow to lift from 3D */
+/* Scrollbar Hide */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Terminal Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.terminal-msg {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Terminal Selection */
+#terminal-output ::selection, #terminal-input::selection {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
 }

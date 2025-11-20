@@ -1,7 +1,10 @@
 // --- 1. SMOOTH SCROLL (LENIS) ---
 let lenis;
-if (typeof Lenis !== "undefined") {
-  lenis = new Lenis({
+// Check if Lenis is available globally or via module
+const LenisClass = typeof Lenis !== "undefined" ? Lenis : window.Lenis;
+
+if (LenisClass) {
+  lenis = new LenisClass({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
@@ -169,6 +172,33 @@ projectImages.forEach((imgContainer) => {
   });
 });
 
+// Brand Link Interaction (Similar to Works)
+const brandLink = document.getElementById("brand-link");
+if (brandLink) {
+  brandLink.addEventListener("mouseenter", () => {
+    cursorText.textContent = "HOME";
+    gsap.to(cursorCircle, { 
+      scale: 3, 
+      backgroundColor: "rgba(255, 255, 255, 0.1)",
+      mixBlendMode: "difference",
+      duration: 0.3,
+      overwrite: true
+    });
+    gsap.to(cursorText, { opacity: 1, duration: 0.3 });
+  });
+  
+  brandLink.addEventListener("mouseleave", () => {
+    gsap.to(cursorCircle, { 
+      scale: 1, 
+      backgroundColor: "transparent",
+      mixBlendMode: "normal",
+      duration: 0.3,
+      overwrite: true
+    });
+    gsap.to(cursorText, { opacity: 0, duration: 0.3, onComplete: () => { cursorText.textContent = "VIEW"; } });
+  });
+}
+
 // Hero Title Interaction
 const heroTitle = document.querySelector(".hero-title");
 if (heroTitle) {
@@ -204,20 +234,28 @@ window.addEventListener("load", () => {
 });
 
 function initHeroAnimations() {
-  gsap.to(".hero-title span", {
-    y: 0,
-    duration: 1.5,
-    stagger: 0.1,
-    ease: "power4.out",
-    delay: 0.2,
-  });
-  gsap.to(".hero-sub span", {
-    y: 0,
-    duration: 1.5,
-    stagger: 0.1,
-    ease: "power4.out",
-    delay: 0.6,
-  });
+  const heroTitleSpans = document.querySelectorAll(".hero-title span");
+  const heroSubSpans = document.querySelectorAll(".hero-sub span");
+
+  if (heroTitleSpans.length > 0) {
+    gsap.to(heroTitleSpans, {
+      y: 0,
+      duration: 1.5,
+      stagger: 0.1,
+      ease: "power4.out",
+      delay: 0.2,
+    });
+  }
+
+  if (heroSubSpans.length > 0) {
+    gsap.to(heroSubSpans, {
+      y: 0,
+      duration: 1.5,
+      stagger: 0.1,
+      ease: "power4.out",
+      delay: 0.6,
+    });
+  }
 }
 
 // --- 6. SCROLL & ANIMATIONS (GSAP + SCROLLTRIGGER) ---
@@ -336,7 +374,7 @@ const initThree = () => {
     metalness: 0.1,
     roughness: 0.05,
     transmission: 0.9,
-    thickness: 0.8,
+    thickness: 0.8, // Note: This might warn in older Three.js versions, but is valid in newer ones
     clearcoat: 1.0,
     clearcoatRoughness: 0.0,
     ior: 1.5,
@@ -441,8 +479,12 @@ const initThree = () => {
         const direction = new THREE.Vector3();
         const targetPos = new THREE.Vector3();
 
+        let animationId;
+        let totalTime = 0;
+
         function animate() {
-          const time = clock.getElapsedTime();
+          const delta = clock.getDelta();
+          totalTime += delta;
 
           // Smooth mouse lerp
           mouse.x += (targetMouse.x - mouse.x) * 0.1;
@@ -451,8 +493,8 @@ const initThree = () => {
           repulsionPoint.set(mouse.x * 6, mouse.y * 6, 0);
 
           // Rotate the entire group slowly
-          shardGroup.rotation.y = time * 0.05;
-          shardGroup.rotation.z = time * 0.02;
+          shardGroup.rotation.y = totalTime * 0.05;
+          shardGroup.rotation.z = totalTime * 0.02;
 
           shards.forEach((shard) => {
             const originalPos = shard.userData.originalPos;
@@ -480,10 +522,24 @@ const initThree = () => {
           });
 
           renderer.render(scene, camera);
-          requestAnimationFrame(animate);
+          animationId = requestAnimationFrame(animate);
         }
 
-        animate();
+        // Optimization: Only animate when visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    clock.start();
+                    if (!animationId) animate();
+                } else {
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                        animationId = null;
+                    }
+                }
+            });
+        });
+        observer.observe(container);
 
   // Debounced resize
   let resizeTimeout;
@@ -593,4 +649,315 @@ function wait(ms) {
 // Initialize Brand Animation
 initBrandAnimation();
 
+// --- 9. AI TERMINAL LOGIC ---
+const input = document.getElementById('terminal-input');
+const output = document.getElementById('terminal-output');
+const terminalBody = document.getElementById('terminal-body');
+const promptPath = document.getElementById('terminal-prompt-path');
+
+// Command History Logic
+let commandHistory = [];
+let historyIndex = -1;
+
+// File System Simulation
+const fileSystem = {
+    "~": {
+        "about.md": "Divyanshu Yadav is a 20-year-old Software Engineering student and developer from Mau, India. He specializes in building immersive digital experiences.",
+        "skills.json": JSON.stringify({
+            core: ["HTML/CSS", "JavaScript", "React", "Tailwind", "Three.js"],
+            tools: ["Git", "GitHub", "VS Code"],
+            other: ["PC Software Dev", "Content Creation"]
+        }, null, 2),
+        "contact.txt": "Email: hello@divyanshu.com\nGitHub: github.com/divyanshuyadav98s\nLinkedIn: linkedin.com/in/divyanshu",
+        "projects": "dir", // Marker for directory
+        ".env": "PERMISSION DENIED"
+    },
+    "~/projects": {
+        "project_alpha.txt": "A responsive web application built with React and Tailwind CSS.",
+        "system_tool.exe": "Binary file not shown.",
+        "youtube_shorts.mp4": "Video file not shown."
+    }
+};
+
+let currentPath = "~";
+
+const NEOFETCH_ART = `
+            .-/+oossssoo+/-.               guest@divyanshu.dev
+        :\`:+ssssssssssssssssss+:\`           -------------------
+      -+sssssssssssssssssssyyssss+-         OS: KODE_OS 1.0 LTS x86_64
+    .ossssssssssssssssssdMMMNysssso.       Host: Portfolio Web
+   /ssssssssssshdmmNNmmyNMMMMhssssss/      Kernel: 5.15.0-91-generic
+  +ssssssssshmydMMMMMMMNddddyssssssss+     Uptime: Forever
+ /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/    Packages: 1 (npm)
+.ssssssssdMMMNhsssssssssshNMMMdssssssss.   Shell: bash 5.1.16
++sssshhhyNMMNyssssssssssssyNMMMysssssss+   Resolution: ${window.innerWidth}x${window.innerHeight}
+ossyNMMMNyMMhsssssssssssssshmmmhssssssso   Theme: Brutalist Dark
+ossyNMMMNyMMhsssssssssssssshmmmhssssssso   Font: Space Mono / Consolas
++sssshhhyNMMNyssssssssssssyNMMMysssssss+   CPU: Creative Flow (100%)
+.ssssssssdMMMNhsssssssssshNMMMdssssssss.   GPU: WebGL Renderer
+ /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/    Memory: 128MB / 16GB
+  +ssssssssshmydMMMMMMMNddddyssssssss+
+   /ssssssssssshdmmNNmmyNMMMMhssssss/
+    .ossssssssssssssssssdMMMNysssso.
+      -+sssssssssssssssssssyyssss+-
+        \`:+ssssssssssssssssss+:\`
+            .-/+oossssoo+/-.
+`;
+
+const commands = {
+    help: () => "Available commands:\n  who, skills, projects, contact\n  ls, cat, cd, pwd, clear\n  git, sudo, uname, date, neofetch, exit",
+    ls: () => {
+        const dirContent = fileSystem[currentPath];
+        return dirContent 
+            ? Object.keys(dirContent).map(item => dirContent[item] === "dir" ? item + "/" : item).join("  ")
+            : "Directory not found.";
+    },
+    cat: (args) => {
+        if (!args.length) return "cat: missing operand";
+        const fileName = args[0];
+        const currentDir = fileSystem[currentPath];
+        if (!currentDir || !currentDir[fileName]) return `cat: ${fileName}: No such file or directory`;
+        if (currentDir[fileName] === "dir") return `cat: ${fileName}: Is a directory`;
+        if (fileName === ".env") return "bash: .env: Permission denied";
+        return currentDir[fileName];
+    },
+    cd: (args) => {
+        if (!args.length || args[0] === "~") currentPath = "~";
+        else if (args[0] === "..") currentPath = "~";
+        else if (args[0] === "projects" && currentPath === "~") currentPath = "~/projects";
+        else return `bash: cd: ${args[0]}: No such file or directory`;
+        
+        if (promptPath) promptPath.textContent = currentPath;
+        return "";
+    },
+    pwd: () => `/home/guest/${currentPath.replace('~', '')}`,
+    whoami: () => "guest",
+    sudo: () => "guest is not in the sudoers file. This incident will be reported.",
+    git: (args) => {
+        if (args[0] === "status") return "On branch main\nYour branch is up to date with 'origin/main'.\n\nworking tree clean";
+        if (args[0] === "log") return "commit 8f5d2a1 (HEAD -> main)\nAuthor: Divyanshu <hello@divyanshu.com>\nDate:   " + new Date().toDateString() + "\n\n    Initial commit: Created portfolio";
+        return "git: usage: git [status|log]";
+    },
+    uname: (args) => args[0] === "-a" ? "Linux divyanshu-dev 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux" : "Linux",
+    date: () => new Date().toString(),
+    exit: () => { if (btnClose) btnClose.click(); return ""; },
+    clear: () => {
+        output.innerHTML = '<div class="text-[#cccccc] mb-2">Welcome to KODE_OS 1.0 LTS (GNU/Linux 5.15.0-91-generic x86_64)</div>';
+        return "";
+    },
+    neofetch: () => NEOFETCH_ART,
+    // Aliases
+    who: () => fileSystem["~"]["about.md"],
+    about: () => fileSystem["~"]["about.md"],
+    skills: () => fileSystem["~"]["skills.json"],
+    stack: () => fileSystem["~"]["skills.json"],
+    projects: () => "List of projects: Project Alpha, System Tool, YouTube Shorts. Type 'cd projects' then 'ls' to see files.",
+    work: () => "List of projects: Project Alpha, System Tool, YouTube Shorts. Type 'cd projects' then 'ls' to see files.",
+    contact: () => fileSystem["~"]["contact.txt"],
+    email: () => fileSystem["~"]["contact.txt"]
+};
+
+if (input && output) {
+  // History Navigation
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = commandHistory[historyIndex];
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        input.value = commandHistory[historyIndex];
+      } else {
+        historyIndex = commandHistory.length;
+        input.value = '';
+      }
+    }
+  });
+
+  input.addEventListener('keypress', async (e) => {
+    if (e.key === 'Enter') {
+      const fullCommand = input.value.trim();
+      const args = fullCommand.split(' ').filter(arg => arg.length > 0);
+      const cmd = args[0] ? args[0].toLowerCase() : '';
+      
+      // Add to history if not empty
+      if (fullCommand) {
+        commandHistory.push(fullCommand);
+        historyIndex = commandHistory.length;
+      }
+
+      // Always add the command line to history, even if empty
+      addMessage(input.value, true);
+      input.value = '';
+
+      if (!cmd) {
+         scrollToBottom();
+         return;
+      }
+
+      await processCommand(cmd, args.slice(1));
+      scrollToBottom();
+    }
+  });
+}
+
+async function processCommand(cmd, args) {
+    const commandFunc = commands[cmd];
+    let response = "";
+    
+    if (commandFunc) {
+        response = commandFunc(args);
+    } else {
+        response = `bash: ${cmd}: command not found`;
+    }
+    
+    if (response) await typeResponse(response);
+}
+
+function scrollToBottom() {
+    if(terminalBody) {
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+}
+
+function addMessage(text, isCommand = false) {
+  const div = document.createElement('div');
+  
+  if (isCommand) {
+    div.className = 'flex items-center gap-2 mb-1';
+    div.innerHTML = `
+        <div class="shrink-0">
+            <span class="text-[#C9C1FC]">guest@divyanshu.dev</span><span class="text-white">:</span><span class="text-[#4c89c4]">${currentPath}</span><span class="text-white">$</span>
+        </div>
+        <div class="text-[#cccccc]">${text}</div>
+    `;
+  } else {
+    div.className = 'text-[#cccccc] mb-2 whitespace-pre-wrap'; // Added whitespace-pre-wrap for formatting
+    div.textContent = text;
+  }
+  
+  output.appendChild(div);
+}
+
+async function typeResponse(text) {
+  const div = document.createElement('div');
+  div.className = 'text-[#cccccc] mb-4 leading-relaxed whitespace-pre-wrap font-mono'; // Added whitespace-pre-wrap
+  output.appendChild(div);
+  
+  // If text is very long (like neofetch), type faster or just show it
+  if (text.length > 100) {
+      div.textContent = text;
+      scrollToBottom();
+  } else {
+      // Typing effect
+      for (let i = 0; i < text.length; i++) {
+        div.textContent += text[i];
+        scrollToBottom();
+        await wait(5); // Fast typing
+      }
+  }
+}
+
+// --- 10. TERMINAL WINDOW CONTROLS ---
+const terminalContainer = document.getElementById('terminal-container');
+const btnMinimize = document.getElementById('terminal-minimize');
+const btnMaximize = document.getElementById('terminal-maximize');
+const btnClose = document.getElementById('terminal-close');
+const rebootContainer = document.getElementById('reboot-container');
+const rebootBtn = document.getElementById('reboot-btn');
+const nav = document.querySelector('nav');
+
+if (terminalContainer && btnMinimize && btnMaximize && btnClose) {
+  
+  // Minimize: Toggle body visibility
+  let isMinimized = false;
+  btnMinimize.addEventListener('click', () => {
+    isMinimized = !isMinimized;
+    if (isMinimized) {
+      terminalBody.style.display = 'none';
+      terminalContainer.style.height = 'auto'; // Shrink to header height
+    } else {
+      terminalBody.style.display = 'block';
+      terminalContainer.style.height = isMaximized ? '100vh' : '60vh';
+    }
+  });
+
+  // Maximize: Toggle full screen
+  let isMaximized = false;
+  btnMaximize.addEventListener('click', () => {
+    isMaximized = !isMaximized;
+    if (isMaximized) {
+      terminalContainer.classList.add('fixed', 'inset-0', 'z-[9999]', 'h-screen', 'w-screen', 'rounded-none');
+      terminalContainer.classList.remove('h-[60vh]', 'rounded-lg', 'relative');
+      if (nav) nav.style.display = 'none'; // Hide Navbar
+      
+      // Ensure body is visible if maximized from minimized state
+      if (isMinimized) {
+        isMinimized = false;
+        terminalBody.style.display = 'block';
+      }
+    } else {
+      terminalContainer.classList.remove('fixed', 'inset-0', 'z-[9999]', 'h-screen', 'w-screen', 'rounded-none');
+      terminalContainer.classList.add('h-[60vh]', 'rounded-lg', 'relative');
+      if (nav) nav.style.display = 'flex'; // Show Navbar
+    }
+  });
+
+  // Close: Hide container (with fade out) and show Reboot button
+  btnClose.addEventListener('click', () => {
+    gsap.to(terminalContainer, { 
+      opacity: 0, 
+      scale: 0.9, 
+      duration: 0.3, 
+      onComplete: () => {
+        terminalContainer.style.display = 'none';
+        
+        // Reset Maximize State on Close
+        if (isMaximized) {
+            isMaximized = false;
+            terminalContainer.classList.remove('fixed', 'inset-0', 'z-[9999]', 'h-screen', 'w-screen', 'rounded-none');
+            terminalContainer.classList.add('h-[60vh]', 'rounded-lg', 'relative');
+            if (nav) nav.style.display = 'flex';
+        }
+
+        if (rebootContainer) {
+            rebootContainer.classList.remove('hidden');
+            gsap.fromTo(rebootContainer, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4 });
+        }
+      }
+    });
+  });
+}
+
+// Reboot Logic
+if (rebootBtn && rebootContainer && terminalContainer) {
+    rebootBtn.addEventListener('click', () => {
+        gsap.to(rebootContainer, {
+            opacity: 0,
+            scale: 0.95,
+            duration: 0.3,
+            onComplete: () => {
+                rebootContainer.classList.add('hidden');
+                terminalContainer.style.display = 'flex';
+                gsap.to(terminalContainer, { opacity: 1, scale: 1, duration: 0.4 });
+                
+                // Reset terminal state
+                output.innerHTML = '<div class="text-[#cccccc] mb-2">Welcome to KODE_OS 1.0 LTS (GNU/Linux 5.15.0-91-generic x86_64)</div>';
+                input.value = '';
+                input.focus();
+            }
+        });
+    });
+}
+
 initThree();
+
+// Force scroll to top on load
+if (history.scrollRestoration) {
+  history.scrollRestoration = "manual";
+}
+window.scrollTo(0, 0);
