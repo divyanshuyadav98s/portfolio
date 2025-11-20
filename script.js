@@ -668,7 +668,7 @@ const fileSystem = {
             tools: ["Git", "GitHub", "VS Code"],
             other: ["PC Software Dev", "Content Creation"]
         }, null, 2),
-        "contact.txt": "Email: hello@divyanshu.com\nGitHub: github.com/divyanshuyadav98s\nLinkedIn: linkedin.com/in/divyanshu",
+        "contact.txt": "Email: yadavdivyanshu428@gmail.com\nGitHub: github.com/divyanshuyadav98s\nLinkedIn: linkedin.com/in/divyanshu",
         "projects": "dir", // Marker for directory
         ".env": "PERMISSION DENIED"
     },
@@ -961,7 +961,7 @@ const emailLink = document.querySelector('a[href^="mailto:"]');
 if (emailLink) {
   emailLink.addEventListener('click', (e) => {
     // Try to copy email to clipboard as fallback
-    const email = 'hello@divyanshu.com';
+    const email = 'yadavdivyanshu428@gmail.com';
     
     // Check if we can use clipboard API
     if (navigator.clipboard && navigator.clipboard.writeText) {
