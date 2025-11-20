@@ -956,6 +956,24 @@ if (rebootBtn && rebootContainer && terminalContainer) {
 
 initThree();
 
+// --- 11. EMAIL LINK FALLBACK FOR BROWSERS ---
+const emailLink = document.querySelector('a[href^="mailto:"]');
+if (emailLink) {
+  emailLink.addEventListener('click', (e) => {
+    // Try to copy email to clipboard as fallback
+    const email = 'hello@divyanshu.com';
+    
+    // Check if we can use clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(() => {
+        console.log('Email copied to clipboard');
+      }).catch(err => {
+        console.log('Clipboard write failed, mailto will handle it');
+      });
+    }
+  });
+}
+
 // Force scroll to top on load
 if (history.scrollRestoration) {
   history.scrollRestoration = "manual";
