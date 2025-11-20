@@ -1,0 +1,205 @@
+:root {
+  --bg-color: #080808;
+  --text-color: #e8e6e3;
+  --accent-color: #bfb8aa;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  cursor: none;
+}
+
+/* Typography Utilities */
+.font-serif {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.font-mono {
+  font-family: "Space Mono", monospace;
+}
+
+/* Outline Text Effect */
+.text-outline {
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.5);
+  color: transparent;
+  transition: all 0.3s ease;
+}
+.text-outline:hover {
+  color: #fff;
+  -webkit-text-stroke: 0px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+/* Creative Letter Animations */
+.creative-letter {
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.creative-letter:hover {
+  color: #fff;
+  -webkit-text-stroke: 0px;
+  transform: scale(1.1) skewX(-10deg);
+  text-shadow: 4px 4px 0px rgba(255, 0, 0, 0.8), -4px -4px 0px rgba(0, 0, 255, 0.8);
+}
+.creative-letter:nth-child(even):hover {
+  transform: scale(1.1) skewX(10deg);
+}
+
+/* Film Grain Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 3D Canvas */
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Behind text */
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+/* Custom Cursor */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s;
+}
+.cursor-circle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
+  mix-blend-mode: difference;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ensure magnetic elements can be transformed */
+a, button, .magnetic, .creative-letter {
+  display: inline-block;
+}
+
+/* Hover States */
+body.hovering .cursor-dot {
+  opacity: 0;
+}
+
+/* Typing Cursor Blink */
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Loader */
+.loader-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: #080808;
+  z-index: 9950;
+  transform: translateX(100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Horizontal Scroll Layouts (Responsive) */
+.horizontal-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column; /* Stack by default on mobile */
+}
+
+.horizontal-slide {
+  width: 100%;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* Solid background to cover 3D if it was visible */
+  background: #080808;
+}
+
+/* Desktop Styles for Horizontal Scroll */
+@media (min-width: 768px) {
+  .horizontal-wrapper {
+    width: 400%; /* 4 slides */
+    height: 100%;
+    flex-direction: row;
+  }
+  .horizontal-slide {
+    width: 100vw;
+    padding: 4rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: none;
+  }
+}
+
+/* Image Parallax Container */
+.img-overflow {
+  overflow: hidden;
+}
+.img-overflow img {
+  transform: scale(1.2);
+  transition: transform 0.5s ease-out;
+}
+
+/* Text Styles for Readability */
+.hero-title {
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Subtle shadow to lift from 3D */
+}

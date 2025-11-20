@@ -3,559 +3,501 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Divyanshu Yadav - Creative Frontend Developer crafting immersive, animated web experiences with modern technologies."
-    />
-    <meta
-      name="keywords"
-      content="frontend developer, web developer, UI/UX designer, portfolio, React, Next.js, GSAP, WebGL"
-    />
-    <meta name="author" content="Divyanshu Yadav" />
-    <title>Divyanshu Yadav | Creative Frontend Developer</title>
+    <title>Divyanshu Yadav | Portfolio</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts: Syne (Creative/Bold) & Inter (Clean) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@200;300;400;500;600&family=Space+Mono&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="design.css" />
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Noise Texture -->
+    <div class="noise-overlay"></div>
+
     <!-- Custom Cursor -->
-    <div class="cursor"></div>
     <div class="cursor-dot"></div>
+    <div class="cursor-circle">
+      <span class="cursor-text opacity-0 text-[4px] font-mono tracking-widest"
+        >VIEW</span
+      >
+    </div>
 
-    <header class="page" id="home">
-      <div id="nev">
-        <div id="nevpart1"></div>
-        <nav id="nav-links">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#experience">Journey</a>
-          <a href="#process">Process</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a class="btn ghost small" href="#contact">Hire Me</a>
+    <!-- 3D Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Loader -->
+    <div class="loader-screen" id="loader">
+      <div
+        class="font-serif text-4xl md:text-6xl font-bold text-white tracking-tighter overflow-hidden"
+      >
+        <span
+          class="inline-block translate-y-full transition-transform duration-700"
+          id="loader-text"
+          >INITIALIZING SYSTEM</span
+        >
+      </div>
+      <div class="mt-4 w-48 h-[2px] bg-white/20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-white w-0" id="loader-bar"></div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a
+        href="#works"
+        class="mobile-link font-serif text-5xl text-white/80 hover:text-white hover:italic transition-all"
+        onclick="closeMenu()"
+        >WORKS</a
+      >
+      <a
+        href="#about"
+        class="mobile-link font-serif text-5xl text-white/80 hover:text-white hover:italic transition-all"
+        onclick="closeMenu()"
+        >STUDIO</a
+      >
+      <a
+        href="#contact"
+        class="mobile-link font-serif text-5xl text-white/80 hover:text-white hover:italic transition-all"
+        onclick="closeMenu()"
+        >CONTACT</a
+      >
+    </div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-start z-50 mix-blend-difference"
+    >
+      <a
+        href="#"
+        class="text-lg font-serif tracking-widest hover:opacity-50 transition-opacity nav-link flex items-center"
+        data-target="#top"
+        id="brand-link"
+      >
+        <!-- Content populated by JS -->
+      </a>
+
+      <div class="hidden md:flex gap-8 font-mono text-xs tracking-widest">
+        <a
+          href="#works"
+          class="hover:line-through nav-link"
+          data-target="#works"
+          >WORKS</a
+        >
+        <a
+          href="#about"
+          class="hover:line-through nav-link"
+          data-target="#about"
+          >STUDIO</a
+        >
+        <a
+          href="#contact"
+          class="hover:line-through nav-link"
+          data-target="#contact"
+          >CONTACT</a
+        >
       </div>
 
-      <div id="hero-card" class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">Creative Developer</p>
-          <h1><i>Hi, I'm Divyanshu</i></h1>
-          <p class="hero-subtitle">
-            I craft immersive, animated web experiences that feel alive and
-            meaningful. Always pushing pixels, code, and imagination.
-          </p>
-          <div class="hero-cta">
-            <a class="btn primary" href="#projects">View Projects</a>
-            <a class="btn ghost" href="#contact">Let's Talk</a>
-          </div>
-          <ul class="hero-stats" aria-label="Impact metrics">
-            <li>
-              <strong>35+</strong>
-              <span>Interfaces shipped</span>
-            </li>
-            <li>
-              <strong>12</strong>
-              <span>Brands collaborated</span>
-            </li>
-            <li>
-              <strong>5.0</strong>
-              <span>Avg. client rating</span>
-            </li>
-          </ul>
-          <div class="hero-socials" aria-label="Social links">
-            <a href="#" aria-label="LinkedIn"
-              ><i class="ri-linkedin-fill"></i
-            ></a>
-            <a href="#" aria-label="GitHub"><i class="ri-github-fill"></i></a>
-            <a href="#" aria-label="Instagram"
-              ><i class="ri-instagram-line"></i
-            ></a>
-          </div>
-        </div>
-        <div class="hero-visual" aria-hidden="true">
-          <div class="orbit orbit-1"></div>
-          <div class="orbit orbit-2"></div>
-          <div class="orbit orbit-3"></div>
-          <div class="planet"></div>
-          <div class="hero-scanlines"></div>
-          <div class="floating-card">
-            <p>Currently building</p>
-            <strong>Immersive Web Systems</strong>
-            <span>Q4 · Stealth fintech</span>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-indicator">
-        <span>Scroll to explore</span>
-        <i class="ri-arrow-down-line" aria-hidden="true"></i>
-      </div>
-    </header>
+      <button
+        id="menu-btn"
+        class="md:hidden group space-y-1.5 cursor-pointer z-[9999] relative"
+      >
+        <div
+          id="burger-top"
+          class="w-8 h-[1px] bg-white group-hover:w-4 transition-all ml-auto"
+        ></div>
+        <div
+          id="burger-bot"
+          class="w-6 h-[1px] bg-white group-hover:w-8 transition-all ml-auto"
+        ></div>
+      </button>
+    </nav>
 
-    <main>
-      <section id="about" class="section">
-        <div class="section-heading">
-            <p class="eyebrow">About</p>
-            <h2>The story behind the pixels.</h2>
-          </div>
-          <div class="about-grid">
-            <p>
-              I'm a front-end engineer obsessed with motion, thoughtful
-              typography, and atmospheric worlds. With a mix of design sense and
-              JavaScript craft, I build responsive experiences that guide users
-              with subtle micro-interactions and cinematic mood.
-            </p>
-            <ul class="about-list">
-              <li>⚡ 3+ years turning concepts into polished products</li>
-              <li>🎨 Strong eye for color, contrast, and storytelling</li>
-              <li>🛰️ Currently exploring WebGL + shader art</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="skills" class="section soft-dark">
-        <div class="section-content">
-          <div class="section-heading">
-            <p class="eyebrow">Skills</p>
-            <h2>Tools I rely on daily.</h2>
-          </div>
-          <div class="skill-grid">
-            <article class="skill-card">
-              <h3>Frontend Core</h3>
-              <p>
-                Semantic HTML, modern CSS, responsive layouts, accessibility.
-              </p>
-              <div class="chip-row">
-                <span class="chip">HTML5</span>
-                <span class="chip">CSS3</span>
-                <span class="chip">JavaScript</span>
-                <span class="chip">TypeScript</span>
-              </div>
-            </article>
-            <article class="skill-card">
-              <h3>Frameworks</h3>
-              <p>
-                Reusable component libraries and high-performance SPA builds.
-              </p>
-              <div class="chip-row">
-                <span class="chip">React</span>
-                <span class="chip">Next.js</span>
-                <span class="chip">Vue</span>
-                <span class="chip">GSAP</span>
-              </div>
-            </article>
-            <article class="skill-card">
-              <h3>Visual Craft</h3>
-              <p>
-                Brand systems, interface polish, and motion-first narratives.
-              </p>
-              <div class="chip-row">
-                <span class="chip">Figma</span>
-                <span class="chip">Framer</span>
-                <span class="chip">Spline</span>
-                <span class="chip">After Effects</span>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" class="section">
-        <div class="section-content">
-          <div class="section-heading">
-            <p class="eyebrow">Projects</p>
-            <h2>Selected work that feels alive.</h2>
-          </div>
-          <div class="project-grid">
-            <article class="project-card">
-              <div class="project-tag">Featured</div>
-              <h3>Nebula Commerce</h3>
-              <p>
-                Luxury e-commerce concept with tactile haptics, scroll-driven
-                storytelling, and delight-first checkout.
-              </p>
-              <div class="project-actions">
-                <a href="#" class="btn text">Case Study</a>
-                <a href="#" class="icon-link" aria-label="Open project"
-                  ><i class="ri-external-link-line"></i
-                ></a>
-              </div>
-            </article>
-            <article class="project-card">
-              <div class="project-tag">Client</div>
-              <h3>Pulse Studio</h3>
-              <p>
-                Portfolio for a sound design duo combining ambient gradients,
-                reactive visuals, and contact capture.
-              </p>
-              <div class="project-actions">
-                <a href="#" class="btn text">See Live</a>
-                <a href="#" class="icon-link" aria-label="Open project"
-                  ><i class="ri-external-link-line"></i
-                ></a>
-              </div>
-            </article>
-            <article class="project-card">
-              <div class="project-tag">Lab</div>
-              <h3>Orbit Atlas</h3>
-              <p>
-                Experimental WebGL data map visualizing satellites with layered
-                depth cues and playful camera work.
-              </p>
-              <div class="project-actions">
-                <a href="#" class="btn text">Prototype</a>
-                <a href="#" class="icon-link" aria-label="Open project"
-                  ><i class="ri-external-link-line"></i
-                ></a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="experience" class="section soft-dark">
-        <div class="section-content">
-          <div class="section-heading">
-            <p class="eyebrow">Journey</p>
-            <h2>Orbiting through roles and realms.</h2>
-          </div>
-          <ol class="timeline">
-            <li>
-              <div class="timeline-dot"></div>
-              <article class="timeline-card">
-                <span class="timeline-year">2024 — Present</span>
-                <h3>Lead Frontend · Nova Labs</h3>
-                <p>
-                  Prototyping volumetric dashboards, shipping DX tooling, and
-                  coaching a squad of motion-minded engineers.
-                </p>
-                <div class="timeline-tags">
-                  <span>Next.js</span><span>GSAP</span><span>WebGL</span>
-                </div>
-              </article>
-            </li>
-            <li>
-              <div class="timeline-dot"></div>
-              <article class="timeline-card">
-                <span class="timeline-year">2022 — 2024</span>
-                <h3>Senior UI Engineer · Pulse Studio</h3>
-                <p>
-                  Crafted immersive marketing sites with layered storytelling,
-                  leading concept-to-launch across 8 international clients.
-                </p>
-                <div class="timeline-tags">
-                  <span>Three.js</span><span>Framer</span><span>Storybook</span>
-                </div>
-              </article>
-            </li>
-            <li>
-              <div class="timeline-dot"></div>
-              <article class="timeline-card">
-                <span class="timeline-year">2019 — 2022</span>
-                <h3>Product Designer · Orbit Collective</h3>
-                <p>
-                  Balanced research, UX, and prototyping to launch community
-                  platforms with rich identity systems.
-                </p>
-                <div class="timeline-tags">
-                  <span>Figma</span><span>ProtoPie</span><span>Analytics</span>
-                </div>
-              </article>
-            </li>
-          </ol>
-        </div>
-      </section>
-
-      <section id="process" class="section">
-        <div class="section-content">
-          <div class="section-heading">
-            <p class="eyebrow">Process</p>
-            <h2>A luminous pipeline from spark to launch.</h2>
-          </div>
-          <div class="process-grid">
-            <article class="process-card">
-              <span class="step">01</span>
-              <h3>Discover</h3>
-              <p>
-                Collaborative workshops, product mapping, and defining the story
-                arc users should feel.
-              </p>
-            </article>
-            <article class="process-card">
-              <span class="step">02</span>
-              <h3>Design</h3>
-              <p>
-                Style exploration, kinetic prototypes, accessibility sweeps, and
-                design systems.
-              </p>
-            </article>
-            <article class="process-card">
-              <span class="step">03</span>
-              <h3>Build</h3>
-              <p>
-                Component engineering, animation polish, performance budgets,
-                iterative QA.
-              </p>
-            </article>
-            <article class="process-card">
-              <span class="step">04</span>
-              <h3>Launch + Grow</h3>
-              <p>
-                Ship, observe, and optimize with progressive enhancements and
-                insight-led updates.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="section gradient-panel">
-        <div class="section-content">
-          <div class="section-heading">
-            <p class="eyebrow">Contact</p>
-            <h2>Let's create something bold together.</h2>
-          </div>
-          <div class="contact-grid">
-            <div class="contact-card">
-              <h3>Available for freelance & full-time roles.</h3>
-              <p>
-                Drop a quick line through the form or reach out via email—I'll
-                respond within 24 hours.
-              </p>
-              <ul>
-                <li><i class="ri-mail-line"></i> hello@manu.dev</li>
-                <li><i class="ri-map-pin-line"></i> Remote · GMT+5:30</li>
-                <li><i class="ri-timer-line"></i> Reply time &lt; 1 day</li>
-              </ul>
+    <main id="top">
+      <!-- Hero Section (With 3D Background) -->
+      <section
+        id="hero"
+        class="h-screen w-full flex flex-col justify-center items-center relative z-10 px-6"
+      >
+        <div class="text-center z-10 mix-blend-difference relative">
+          <h1
+            class="font-serif text-[15vw] leading-[0.75] mix-blend-overlay hero-title"
+          >
+            <div class="overflow-hidden flex justify-center gap-1">
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="C"
+                >C</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="R"
+                >R</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="E"
+                >E</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="A"
+                >A</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="T"
+                >T</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="I"
+                >I</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="V"
+                >V</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="E"
+                >E</span
+              >
             </div>
-            <form class="contact-form">
-              <label>
-                Name
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your name"
-                  required
-                />
-              </label>
-              <label>
-                Email
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="you@email.com"
-                  required
-                />
-              </label>
-              <label>
-                Project details
-                <textarea
-                  name="message"
-                  rows="4"
-                  placeholder="Tell me about your idea"
-                  required
-                ></textarea>
-              </label>
-              <button type="submit" class="btn primary full">
-                Send Message
-              </button>
-            </form>
+            <div class="overflow-hidden flex justify-center items-center gap-4">
+              <span
+                class="block translate-y-full text-white/90 text-[8vw] magnetic cursor-pointer"
+                >×</span
+              >
+              <span
+                class="block translate-y-full text-transparent text-outline magnetic cursor-pointer"
+                >CODE</span
+              >
+            </div>
+          </h1>
+          <p
+            class="font-mono text-xs md:text-sm mt-6 tracking-[0.2em] text-white/50 uppercase"
+          >
+            Immersive Digital Experiences
+          </p>
+        </div>
+
+        <div
+          class="absolute bottom-10 left-10 md:left-12 font-mono text-xs md:text-sm max-w-xs text-white/60 leading-relaxed"
+        >
+          <div class="overflow-hidden magnetic cursor-pointer inline-block">
+            <span class="block translate-y-full hero-sub">WEB DEVELOPMENT</span>
+          </div>
+          <div class="overflow-hidden magnetic cursor-pointer inline-block">
+            <span class="block translate-y-full hero-sub"
+              >CONTENT CREATION</span
+            >
+          </div>
+        </div>
+
+        <div
+          class="absolute bottom-10 right-10 md:right-12 animate-spin-slow magnetic cursor-pointer"
+        >
+          <svg
+            width="100"
+            height="100"
+            viewBox="0 0 100 100"
+            class="text-white/20 fill-current"
+          >
+            <path
+              id="circlePath"
+              d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+              fill="transparent"
+            />
+            <text font-size="11" font-family="Space Mono" letter-spacing="2px">
+              <textPath href="#circlePath" startOffset="0%">
+                SCROLL TO EXPLORE • SCROLL TO EXPLORE •
+              </textPath>
+            </text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Introduction / Philosophy -->
+      <section
+        id="about"
+        class="py-40 px-6 md:px-24 relative z-20 bg-[#080808]"
+      >
+        <div class="max-w-5xl mx-auto">
+          <h2
+            class="font-serif text-4xl md:text-7xl leading-[1.1] text-white reveal-type uppercase"
+          >
+            <span
+              class="block mb-4 text-white/40 text-xl md:text-2xl font-mono tracking-widest"
+              >/// IDENTITY</span
+            >
+            <span class="block text-[8vw] md:text-[6vw] font-bold mb-4"
+              >DIVYANSHU<span class="text-transparent text-outline"
+                >.DEV</span
+              ></span
+            >
+            <span
+              class="block text-2xl md:text-4xl font-medium text-white/80 mb-6"
+            >
+              CREATING
+              <span class="text-white border-b-2 border-white"
+                >DIGITAL REALITIES</span
+              >
+              FROM <span class="text-white/50">MAU, INDIA</span>.
+            </span>
+            <span class="block text-xl md:text-3xl text-white/60 font-light">
+              I BLEND
+              <span class="relative inline-block group">
+                <span class="text-white font-bold">CODE</span>
+              </span>
+              WITH
+              <span class="relative inline-block">
+                <span class="text-white font-bold">CREATIVITY</span>
+              </span>
+              TO FORGE NEW WORLDS.
+            </span>
+          </h2>
+          <div
+            class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-16 border-t border-white/20 pt-10"
+          >
+            <div>
+              <h3 class="font-mono text-xs tracking-widest mb-4 text-white">
+                /// 01. BACKGROUND
+              </h3>
+              <p class="text-white/70 text-lg font-light mb-4">
+                Software Engineering student. Web Development. PC Software.
+                Pushing boundaries of what's possible on the web.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-mono text-xs tracking-widest mb-4 text-white">
+                /// 02. TECH STACK
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >HTML/CSS</span
+                >
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >JavaScript</span
+                >
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >React</span
+                >
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >Three.js</span
+                >
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >Tailwind</span
+                >
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="testimonials" class="section soft-dark">
-        <div class="section-content">
-          <div class="section-heading">
-            <p class="eyebrow">Testimonials</p>
-            <h2>Partners describing the experience.</h2>
+      <!-- Horizontal Scroll Gallery (The "Presentation" Part) -->
+      <section
+        id="works"
+        class="h-auto md:h-screen w-full overflow-hidden relative z-20"
+      >
+        <!-- This container will be translated horizontally by GSAP on Desktop -->
+        <div class="horizontal-wrapper" id="gallery-wrapper">
+          <!-- Title Slide -->
+          <div class="horizontal-slide">
+            <div class="relative z-10">
+              <h2
+                class="font-serif text-[12vw] leading-none text-white uppercase"
+              >
+                SELECTED<br /><span class="text-transparent text-outline ml-20"
+                  >WORKS</span
+                >
+              </h2>
+              <p
+                class="font-mono text-sm mt-8 ml-2 max-w-md text-white/60 uppercase tracking-widest"
+              >
+                /// ARCHIVE 2023 - 2025
+              </p>
+            </div>
           </div>
-          <div class="testimonial-grid">
-            <article class="testimonial-card">
-              <p class="quote">
-                "Divyanshu captured the soul of our brand and wrapped it in
-                delightful micro-moments that users can't stop talking about."
-              </p>
-              <div class="author">
-                <span class="avatar">AR</span>
-                <div>
-                  <strong>Aarav Rao</strong>
-                  <span>Founder · Pulse Studio</span>
-                </div>
+
+          <!-- Project 1 -->
+          <div class="horizontal-slide">
+            <div
+              class="flex flex-col md:flex-row gap-12 items-center w-full max-w-7xl mx-auto"
+            >
+              <div
+                class="w-full md:w-1/2 aspect-[3/4] img-overflow group cursor-pointer relative"
+              >
+                <div
+                  class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"
+                ></div>
+                <img
+                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop"
+                  alt="Web Development"
+                  loading="lazy"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 duration-700"
+                />
               </div>
-            </article>
-            <article class="testimonial-card">
-              <p class="quote">
-                "From kickoff to launch, he translated strategy into expressive
-                visuals and code. Every release felt cinematic."
-              </p>
-              <div class="author">
-                <span class="avatar">LS</span>
-                <div>
-                  <strong>Leah Singh</strong>
-                  <span>Creative Director · Orbit Collective</span>
-                </div>
+              <div class="w-full md:w-1/3">
+                <span
+                  class="font-mono text-xs text-white/50 mb-4 block tracking-widest"
+                  >/// 001 — WEB DEV</span
+                >
+                <h3 class="font-serif text-5xl md:text-8xl mb-6 uppercase">
+                  Project<br /><span class="text-transparent text-outline"
+                    >Alpha</span
+                  >
+                </h3>
+                <p class="text-white/60 font-light leading-relaxed mb-8">
+                  A responsive web application built with React and Tailwind
+                  CSS. Focusing on clean UI and smooth user experience.
+                </p>
+                <a
+                  href="#"
+                  class="inline-block border-b border-white/30 pb-1 font-mono text-xs tracking-widest hover:text-white hover:border-white transition-all uppercase"
+                  >VIEW GITHUB</a
+                >
               </div>
-            </article>
-            <article class="testimonial-card">
-              <p class="quote">
-                "He blends rigor with experimentation: performance targets met,
-                innovation unlocked, team inspired."
-              </p>
-              <div class="author">
-                <span class="avatar">KM</span>
-                <div>
-                  <strong>Kai Mehta</strong>
-                  <span>CTO · Nova Labs</span>
-                </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="horizontal-slide">
+            <div
+              class="flex flex-col md:flex-row-reverse gap-12 items-center w-full max-w-7xl mx-auto"
+            >
+              <div
+                class="w-full md:w-1/2 aspect-video img-overflow group cursor-pointer"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop"
+                  alt="PC Software"
+                  loading="lazy"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 duration-700"
+                />
               </div>
-            </article>
+              <div class="w-full md:w-1/3 text-right md:text-left">
+                <span
+                  class="font-mono text-xs text-white/50 mb-4 block tracking-widest"
+                  >/// 002 — SOFTWARE</span
+                >
+                <h3 class="font-serif text-5xl md:text-8xl mb-6 uppercase">
+                  System<br /><span class="text-transparent text-outline"
+                    >Tool</span
+                  >
+                </h3>
+                <p class="text-white/60 font-light leading-relaxed mb-8">
+                  A PC utility software designed to optimize workflow. Built
+                  using modern software engineering principles.
+                </p>
+                <a
+                  href="#"
+                  class="inline-block border-b border-white/30 pb-1 font-mono text-xs tracking-widest hover:text-white hover:border-white transition-all uppercase"
+                  >VIEW DETAILS</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="horizontal-slide">
+            <div
+              class="flex flex-col md:flex-row gap-12 items-center w-full max-w-7xl mx-auto"
+            >
+              <div
+                class="w-full md:w-1/2 aspect-square img-overflow rounded-none group cursor-pointer"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop"
+                  alt="YouTube Content"
+                  loading="lazy"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 duration-700"
+                />
+              </div>
+              <div class="w-full md:w-1/3">
+                <span
+                  class="font-mono text-xs text-white/50 mb-4 block tracking-widest"
+                  >/// 003 — CONTENT</span
+                >
+                <h3 class="font-serif text-5xl md:text-8xl mb-6 uppercase">
+                  YouTube<br /><span class="text-transparent text-outline"
+                    >Shorts</span
+                  >
+                </h3>
+                <p class="text-white/60 font-light leading-relaxed mb-8">
+                  Creating engaging content about influencers' journeys
+                  (Sadhguru, Crazy XYZ) in Hindi/Hinglish.
+                </p>
+                <a
+                  href="#"
+                  class="inline-block border-b border-white/30 pb-1 font-mono text-xs tracking-widest hover:text-white hover:border-white transition-all uppercase"
+                  >WATCH CHANNEL</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer / Contact -->
+      <section
+        id="contact"
+        class="h-[80vh] flex flex-col justify-center items-center relative z-10 px-6 bg-[#080808]"
+      >
+        <p
+          class="font-mono text-xs text-white/50 mb-8 tracking-widest uppercase"
+        >
+          /// INITIATE CONTACT
+        </p>
+        <a
+          href="mailto:hello@divyanshu.com"
+          class="group relative inline-block"
+        >
+          <h2
+            class="font-serif text-[12vw] leading-none group-hover:opacity-0 transition-opacity duration-500 text-white uppercase"
+          >
+            SAY HI.
+          </h2>
+          <h2
+            class="font-serif text-[12vw] leading-none absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-transparent text-outline uppercase"
+          >
+            EMAIL ME.
+          </h2>
+        </a>
+
+        <div
+          class="absolute bottom-12 w-full px-12 flex justify-between font-mono text-xs text-white/30 uppercase"
+        >
+          <div>© 2025 DIVYANSHU YADAV</div>
+          <div class="flex gap-6">
+            <a href="#" class="hover:text-white transition-colors">GITHUB</a>
+            <a href="#" class="hover:text-white transition-colors">LINKEDIN</a>
+            <a href="#" class="hover:text-white transition-colors">YOUTUBE</a>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <p>© <span id="year"></span> Manu Divyanshu · Crafted with curiosity.</p>
-    </footer>
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      // Custom Cursor Animation
-      const cursor = document.querySelector(".cursor");
-      const cursorDot = document.querySelector(".cursor-dot");
-      let mouseX = 0,
-        mouseY = 0;
-      let cursorX = 0,
-        cursorY = 0;
-      let dotX = 0,
-        dotY = 0;
-
-      document.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-
-        // Instant dot position
-        dotX = mouseX;
-        dotY = mouseY;
-        cursorDot.style.left = dotX + "px";
-        cursorDot.style.top = dotY + "px";
-
-        // Create trail effect
-        if (Math.random() > 0.7) {
-          createTrail(mouseX, mouseY);
-        }
-      });
-
-      // Smooth cursor ring follow
-      function animateCursor() {
-        const speed = 0.15;
-        cursorX += (mouseX - cursorX) * speed;
-        cursorY += (mouseY - cursorY) * speed;
-
-        cursor.style.left = cursorX + "px";
-        cursor.style.top = cursorY + "px";
-
-        requestAnimationFrame(animateCursor);
-      }
-      animateCursor();
-
-      // Create trail particles
-      function createTrail(x, y) {
-        const trail = document.createElement("div");
-        trail.className = "cursor-trail";
-        trail.style.left = x + "px";
-        trail.style.top = y + "px";
-        document.body.appendChild(trail);
-
-        setTimeout(() => {
-          trail.remove();
-        }, 800);
-      }
-
-      // Hover effect on interactive elements
-      const interactiveElements = document.querySelectorAll(
-        "a, button, .btn, .chip, .project-card, .skill-card"
-      );
-      interactiveElements.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          cursor.classList.add("hover");
-        });
-        el.addEventListener("mouseleave", () => {
-          cursor.classList.remove("hover");
-        });
-      });
-
-      // Smooth scroll behavior for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }
-        });
-      });
-
-      // Intersection Observer for scroll-triggered animations
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px",
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      }, observerOptions);
-
-      // Observe all sections and cards
-      document
-        .querySelectorAll(".section, .project-card, .process-card, .about-grid")
-        .forEach((el) => {
-          observer.observe(el);
-        });
-
-      // Parallax effect for hero visual
-      window.addEventListener("scroll", () => {
-        const scrolled = window.pageYOffset;
-        const heroVisual = document.querySelector(".hero-visual");
-        if (heroVisual && scrolled < window.innerHeight) {
-          heroVisual.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-      });
-
-      // Form submission handler
-      const contactForm = document.querySelector(".contact-form");
-      if (contactForm) {
-        contactForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const btn = contactForm.querySelector('button[type="submit"]');
-          const originalText = btn.textContent;
-          btn.textContent = "Sending...";
-          btn.disabled = true;
-
-          // Simulate form submission (replace with actual API call)
-          setTimeout(() => {
-            btn.textContent = "✓ Message Sent!";
-            contactForm.reset();
-            setTimeout(() => {
-              btn.textContent = originalText;
-              btn.disabled = false;
-            }, 2000);
-          }, 1500);
-        });
-      }
-
-      // Tesseract removed
-    </script>
+    <script src="script.js" defer></script>
   </body>
 </html>
