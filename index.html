@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Divyanshu Yadav | Portfolio</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts: Syne (Creative/Bold) & Inter (Clean) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@200;300;400;500;600&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      // Force scroll to top immediately
+      if (history.scrollRestoration) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+
+      // Clear any hash from URL to prevent jumping
+      if (window.location.hash) {
+        history.replaceState(null, null, window.location.pathname);
+      }
+    </script>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Noise Texture -->
+    <div class="noise-overlay"></div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle">
+      <span class="cursor-text opacity-0 text-[4px] font-mono tracking-widest"
+        >VIEW</span
+      >
+    </div>
+
+    <!-- 3D Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Loader -->
+    <div class="loader-screen" id="loader">
+      <div
+        class="font-serif text-4xl md:text-6xl font-bold text-white tracking-tighter overflow-hidden"
+      >
+        <span
+          class="inline-block translate-y-full transition-transform duration-700"
+          id="loader-text"
+          >INITIALIZING SYSTEM</span
+        >
+      </div>
+      <div class="mt-4 w-48 h-[2px] bg-white/20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-white w-0" id="loader-bar"></div>
+      </div>
+    </div>
+
+    <!-- AI Terminal Overlay -->
+    <!-- Removed floating terminal -->
+
+    <!-- Terminal Toggle Button -->
+    <!-- Removed toggle button -->
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a
+        href="#works"
+        class="mobile-link font-serif text-5xl text-white/80 hover:text-white hover:italic transition-all"
+        onclick="closeMenu()"
+        >WORKS</a
+      >
+      <a
+        href="#about"
+        class="mobile-link font-serif text-5xl text-white/80 hover:text-white hover:italic transition-all"
+        onclick="closeMenu()"
+        >STUDIO</a
+      >
+      <a
+        href="#ai-interface"
+        class="mobile-link font-serif text-5xl text-white/80 hover:text-white hover:italic transition-all"
+        onclick="closeMenu()"
+        >TERMINAL</a
+      >
+      <a
+        href="#contact"
+        class="mobile-link font-serif text-5xl text-white/80 hover:text-white hover:italic transition-all"
+        onclick="closeMenu()"
+        >CONTACT</a
+      >
+    </div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 w-full p-6 md:p-12 flex justify-between items-start z-50 mix-blend-difference"
+    >
+      <a
+        href="#"
+        class="text-lg font-serif tracking-widest transition-opacity nav-link flex items-center"
+        data-target="#top"
+        id="brand-link"
+      >
+        <!-- Content populated by JS -->
+      </a>
+
+      <div class="hidden md:flex gap-8 font-mono text-xs tracking-widest">
+        <a
+          href="#works"
+          class="hover:line-through nav-link"
+          data-target="#works"
+          >WORKS</a
+        >
+        <a
+          href="#about"
+          class="hover:line-through nav-link"
+          data-target="#about"
+          >STUDIO</a
+        >
+        <a
+          href="#ai-interface"
+          class="hover:line-through nav-link"
+          data-target="#ai-interface"
+          >TERMINAL</a
+        >
+        <a
+          href="#contact"
+          class="hover:line-through nav-link"
+          data-target="#contact"
+          >CONTACT</a
+        >
+      </div>
+
+      <button
+        id="menu-btn"
+        class="md:hidden group space-y-1.5 cursor-pointer z-[9999] relative"
+      >
+        <div
+          id="burger-top"
+          class="w-8 h-[1px] bg-white group-hover:w-4 transition-all ml-auto"
+        ></div>
+        <div
+          id="burger-bot"
+          class="w-6 h-[1px] bg-white group-hover:w-8 transition-all ml-auto"
+        ></div>
+      </button>
+    </nav>
+
+    <main id="top">
+      <!-- Hero Section (With 3D Background) -->
+      <section
+        id="hero"
+        class="h-screen w-full flex flex-col justify-center items-center relative z-10 px-6"
+      >
+        <div class="text-center z-10 mix-blend-difference relative">
+          <h1
+            class="font-serif text-[15vw] leading-[0.75] mix-blend-overlay hero-title"
+          >
+            <div class="overflow-hidden flex justify-center gap-1">
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="C"
+                >C</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="R"
+                >R</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="E"
+                >E</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="A"
+                >A</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="T"
+                >T</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="I"
+                >I</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="V"
+                >V</span
+              >
+              <span
+                class="block translate-y-full text-outline magnetic creative-letter"
+                data-letter="E"
+                >E</span
+              >
+            </div>
+            <div class="overflow-hidden flex justify-center items-center gap-4">
+              <span
+                class="block translate-y-full text-white/90 text-[8vw] magnetic cursor-pointer"
+                >×</span
+              >
+              <span
+                class="block translate-y-full text-transparent text-outline magnetic cursor-pointer"
+                >CODE</span
+              >
+            </div>
+          </h1>
+          <p
+            class="font-mono text-xs md:text-sm mt-6 tracking-[0.2em] text-white/50 uppercase"
+          >
+            Immersive Digital Experiences
+          </p>
+        </div>
+
+        <div
+          class="absolute bottom-10 left-10 md:left-12 font-mono text-xs md:text-sm max-w-xs text-white/60 leading-relaxed"
+        >
+          <div class="overflow-hidden magnetic cursor-pointer inline-block">
+            <span class="block translate-y-full hero-sub">WEB DEVELOPMENT</span>
+          </div>
+          <div class="overflow-hidden magnetic cursor-pointer inline-block">
+            <span class="block translate-y-full hero-sub"
+              >CONTENT CREATION</span
+            >
+          </div>
+        </div>
+
+        <div
+          class="absolute bottom-10 right-10 md:right-12 animate-spin-slow magnetic cursor-pointer"
+        >
+          <svg
+            width="100"
+            height="100"
+            viewBox="0 0 100 100"
+            class="text-white/20 fill-current"
+          >
+            <path
+              id="circlePath"
+              d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+              fill="transparent"
+            />
+            <text font-size="11" font-family="Space Mono" letter-spacing="2px">
+              <textPath href="#circlePath" startOffset="0%">
+                SCROLL TO EXPLORE • SCROLL TO EXPLORE •
+              </textPath>
+            </text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Capabilities Rail -->
+      <section
+        id="capabilities"
+        class="py-32 px-6 md:px-24 relative z-20 overflow-hidden"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col md:flex-row md:items-end gap-10 mb-16">
+            <div class="flex-1">
+              <p class="font-mono text-xs text-white/50 tracking-[0.3em] mb-4">
+                /// CAPABILITIES PLAYBOOK
+              </p>
+              <h3
+                class="font-serif text-4xl md:text-6xl text-white leading-tight"
+              >
+                Product engineering for brands that want<br />motion, depth &
+                story.
+              </h3>
+            </div>
+            <div class="flex-1 text-white/60 font-light leading-relaxed">
+              <p class="mb-6">
+                Inspired by kodeimmersive.com's studio rail, this stack focuses
+                on immersive web builds, realtime 3D, and narrative systems
+                layered with high-conversion UX.
+              </p>
+              <div
+                class="flex flex-wrap gap-4 text-xs font-mono tracking-[0.3em] uppercase"
+              >
+                <span class="chip">Realtime 3D</span>
+                <span class="chip">Motion Systems</span>
+                <span class="chip">Product Strategy</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="service-rail scrollbar-hide">
+            <article class="service-card">
+              <div class="service-card-head">
+                <span class="service-index">01</span>
+                <span class="service-tag">Launch Kits</span>
+              </div>
+              <h4>Flagship Web Systems</h4>
+              <p>
+                Full-stack builds that blend hero storytelling, interactive
+                terminals, and smooth commerce-ready flows.
+              </p>
+              <ul>
+                <li>Next.js / React platforms</li>
+                <li>Custom CMS + analytics</li>
+                <li>Performance-first delivery</li>
+              </ul>
+            </article>
+
+            <article class="service-card">
+              <div class="service-card-head">
+                <span class="service-index">02</span>
+                <span class="service-tag">Experience Lab</span>
+              </div>
+              <h4>Immersive 3D & Motion</h4>
+              <p>
+                Shattered-glass scenes, WebGL particles, and physics-driven
+                interactions optimized for modern GPUs.
+              </p>
+              <ul>
+                <li>Three.js shader work</li>
+                <li>GSAP narrative scroll</li>
+                <li>Procedural art pipelines</li>
+              </ul>
+            </article>
+
+            <article class="service-card">
+              <div class="service-card-head">
+                <span class="service-index">03</span>
+                <span class="service-tag">Content Engine</span>
+              </div>
+              <h4>Short-form Systems</h4>
+              <p>
+                Branded streaming hubs, utility dashboards, and automation
+                layers for YouTube & shorts ecosystems.
+              </p>
+              <ul>
+                <li>Editorial CMS tooling</li>
+                <li>Multi-channel publishing</li>
+                <li>Live performance metrics</li>
+              </ul>
+            </article>
+
+            <article class="service-card">
+              <div class="service-card-head">
+                <span class="service-index">04</span>
+                <span class="service-tag">Ops Support</span>
+              </div>
+              <h4>Growth & Iteration</h4>
+              <p>
+                Partner engagements for rapid experiments, CRO tweaks, and
+                design system maintenance.
+              </p>
+              <ul>
+                <li>Quarterly optimization</li>
+                <li>Design QA & audits</li>
+                <li>Ops automation bridges</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="service-marquee mt-12">
+            <div class="marquee-track">
+              <span>FULL STACK SYSTEMS</span>
+              <span>IMMERSIVE STORYTELLING</span>
+              <span>3D MOTION</span>
+              <span>CONTENT AUTOMATION</span>
+              <span>BRAND TOOLING</span>
+              <span>FULL STACK SYSTEMS</span>
+              <span>IMMERSIVE STORYTELLING</span>
+              <span>3D MOTION</span>
+              <span>CONTENT AUTOMATION</span>
+              <span>BRAND TOOLING</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Introduction / Philosophy -->
+      <section
+        id="about"
+        class="py-40 px-6 md:px-24 relative z-20 bg-[#080808]"
+      >
+        <div class="max-w-5xl mx-auto">
+          <h2
+            class="font-serif text-4xl md:text-7xl leading-[1.1] text-white reveal-type uppercase"
+          >
+            <span
+              class="block mb-4 text-white/40 text-xl md:text-2xl font-mono tracking-widest"
+              >/// IDENTITY</span
+            >
+            <span class="block text-[8vw] md:text-[6vw] font-bold mb-4"
+              >DIVYANSHU<span class="text-transparent text-outline"
+                >.DEV</span
+              ></span
+            >
+            <span
+              class="block text-2xl md:text-4xl font-medium text-white/80 mb-6"
+            >
+              CREATING
+              <span class="text-white border-b-2 border-white"
+                >DIGITAL REALITIES</span
+              >
+              FROM <span class="text-white/50">MAU, INDIA</span>.
+            </span>
+            <span class="block text-xl md:text-3xl text-white/60 font-light">
+              I BLEND
+              <span class="relative inline-block group">
+                <span class="text-white font-bold">CODE</span>
+              </span>
+              WITH
+              <span class="relative inline-block">
+                <span class="text-white font-bold">CREATIVITY</span>
+              </span>
+              TO FORGE NEW WORLDS.
+            </span>
+          </h2>
+          <div
+            class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-16 border-t border-white/20 pt-10"
+          >
+            <div>
+              <h3 class="font-mono text-xs tracking-widest mb-4 text-white">
+                /// 01. BACKGROUND
+              </h3>
+              <p class="text-white/70 text-lg font-light mb-4">
+                Software Engineering student. Web Development. PC Software.
+                Pushing boundaries of what's possible on the web.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-mono text-xs tracking-widest mb-4 text-white">
+                /// 02. TECH STACK
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >HTML/CSS</span
+                >
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >JavaScript</span
+                >
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >React</span
+                >
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >Three.js</span
+                >
+                <span
+                  class="px-4 py-2 border border-white/30 hover:bg-white hover:text-black transition-colors text-sm text-white/80 uppercase font-mono"
+                  >Tailwind</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spotlight Metrics -->
+      <section id="signal" class="py-32 px-6 md:px-24 relative z-20">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr_1fr] gap-16">
+          <div>
+            <p class="font-mono text-xs text-white/50 tracking-[0.3em] mb-6">
+              /// SIGNAL BOOST
+            </p>
+            <h3
+              class="font-serif text-4xl md:text-6xl text-white leading-tight mb-8"
+            >
+              Building standout web experiences<br />with measurable impact.
+            </h3>
+            <p class="text-white/60 font-light leading-relaxed mb-8">
+              From immersive product launches to content platforms, I help
+              brands translate complex stories into visceral, interactive web
+              moments.
+            </p>
+            <div class="flex flex-wrap items-center gap-4">
+              <span class="status-pill">OPEN FOR COLLABS</span>
+              <div class="flex items-center gap-3 text-white/60 text-sm">
+                <span
+                  class="w-2 h-2 rounded-full bg-green-400 animate-pulse"
+                ></span>
+                Booking 2026 projects now
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card">
+              <p class="stat-label">Shipped Interfaces</p>
+              <p class="stat-value" data-stat-target="32">0</p>
+              <p class="stat-caption">
+                Product sites & tools delivered end-to-end.
+              </p>
+            </article>
+
+            <article class="stat-card">
+              <p class="stat-label">Content Reach</p>
+              <p class="stat-value" data-stat-target="4.5" data-stat-suffix="M">
+                0
+              </p>
+              <p class="stat-caption">
+                Organic views generated across short-form drops.
+              </p>
+            </article>
+
+            <article class="stat-card">
+              <p class="stat-label">Avg. Turnaround</p>
+              <p class="stat-value" data-stat-target="14" data-stat-suffix="d">
+                0
+              </p>
+              <p class="stat-caption">
+                From first call to interactive prototype.
+              </p>
+            </article>
+
+            <article class="stat-card">
+              <p class="stat-label">Retention Rate</p>
+              <p class="stat-value" data-stat-target="92" data-stat-suffix="%">
+                0
+              </p>
+              <p class="stat-caption">Clients returning for second builds.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Horizontal Scroll Gallery (The "Presentation" Part) -->
+      <section
+        id="works"
+        class="h-auto md:h-screen w-full overflow-hidden relative z-20"
+      >
+        <!-- This container will be translated horizontally by GSAP on Desktop -->
+        <div class="horizontal-wrapper" id="gallery-wrapper">
+          <!-- Title Slide -->
+          <div class="horizontal-slide">
+            <div class="relative z-10">
+              <h2
+                class="font-serif text-[12vw] leading-none text-white uppercase"
+              >
+                SELECTED<br /><span class="text-transparent text-outline ml-20"
+                  >WORKS</span
+                >
+              </h2>
+              <p
+                class="font-mono text-sm mt-8 ml-2 max-w-md text-white/60 uppercase tracking-widest"
+              >
+                /// ARCHIVE 2023 - 2025
+              </p>
+            </div>
+          </div>
+
+          <!-- Project 1 -->
+          <div class="horizontal-slide">
+            <div
+              class="flex flex-col md:flex-row gap-12 items-center w-full max-w-7xl mx-auto"
+            >
+              <div
+                class="w-full md:w-1/2 aspect-[3/4] img-overflow group cursor-pointer relative"
+              >
+                <div
+                  class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"
+                ></div>
+                <img
+                  src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1920&auto=format&fit=crop"
+                  alt="Web Development"
+                  loading="lazy"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 duration-700"
+                />
+              </div>
+              <div class="w-full md:w-1/3">
+                <span
+                  class="font-mono text-xs text-white/50 mb-4 block tracking-widest"
+                  >/// 001 — WEB DEV</span
+                >
+                <h3 class="font-serif text-5xl md:text-8xl mb-6 uppercase">
+                  Project<br /><span class="text-transparent text-outline"
+                    >Alpha</span
+                  >
+                </h3>
+                <p class="text-white/60 font-light leading-relaxed mb-8">
+                  A responsive web application built with React and Tailwind
+                  CSS. Focusing on clean UI and smooth user experience.
+                </p>
+                <a
+                  href="#"
+                  class="inline-block border-b border-white/30 pb-1 font-mono text-xs tracking-widest hover:text-white hover:border-white transition-all uppercase"
+                  >VIEW GITHUB</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="horizontal-slide">
+            <div
+              class="flex flex-col md:flex-row-reverse gap-12 items-center w-full max-w-7xl mx-auto"
+            >
+              <div
+                class="w-full md:w-1/2 aspect-video img-overflow group cursor-pointer"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1920&auto=format&fit=crop"
+                  alt="PC Software"
+                  loading="lazy"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 duration-700"
+                />
+              </div>
+              <div class="w-full md:w-1/3 text-right md:text-left">
+                <span
+                  class="font-mono text-xs text-white/50 mb-4 block tracking-widest"
+                  >/// 002 — SOFTWARE</span
+                >
+                <h3 class="font-serif text-5xl md:text-8xl mb-6 uppercase">
+                  System<br /><span class="text-transparent text-outline"
+                    >Tool</span
+                  >
+                </h3>
+                <p class="text-white/60 font-light leading-relaxed mb-8">
+                  A PC utility software designed to optimize workflow. Built
+                  using modern software engineering principles.
+                </p>
+                <a
+                  href="#"
+                  class="inline-block border-b border-white/30 pb-1 font-mono text-xs tracking-widest hover:text-white hover:border-white transition-all uppercase"
+                  >VIEW DETAILS</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="horizontal-slide">
+            <div
+              class="flex flex-col md:flex-row gap-12 items-center w-full max-w-7xl mx-auto"
+            >
+              <div
+                class="w-full md:w-1/2 aspect-square img-overflow rounded-none group cursor-pointer"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=1920&auto=format&fit=crop"
+                  alt="YouTube Content"
+                  loading="lazy"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 duration-700"
+                />
+              </div>
+              <div class="w-full md:w-1/3">
+                <span
+                  class="font-mono text-xs text-white/50 mb-4 block tracking-widest"
+                  >/// 003 — CONTENT</span
+                >
+                <h3 class="font-serif text-5xl md:text-8xl mb-6 uppercase">
+                  YouTube<br /><span class="text-transparent text-outline"
+                    >Shorts</span
+                  >
+                </h3>
+                <p class="text-white/60 font-light leading-relaxed mb-8">
+                  Creating engaging content about influencers' journeys
+                  (Sadhguru, Crazy XYZ) in Hindi/Hinglish.
+                </p>
+                <a
+                  href="#"
+                  class="inline-block border-b border-white/30 pb-1 font-mono text-xs tracking-widest hover:text-white hover:border-white transition-all uppercase"
+                  >WATCH CHANNEL</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process Timeline -->
+      <section id="process" class="py-32 px-6 md:px-24 relative z-20">
+        <div class="process-grid max-w-6xl mx-auto">
+          <div class="process-sticky">
+            <p class="font-mono text-xs text-white/50 tracking-[0.3em] mb-4">
+              /// DELIVERY LOOP
+            </p>
+            <h3
+              class="font-serif text-4xl md:text-6xl text-white leading-tight mb-6"
+            >
+              Lean sprint rhythm.<br />Zero fluff hand-off.
+            </h3>
+            <p class="text-white/60 font-light leading-relaxed mb-6">
+              A cadence borrowed from kodeimmersive's production model: tight
+              alignment, rapid prototyping, and cinematic polish layered last.
+            </p>
+            <ul
+              class="process-legends text-xs font-mono tracking-[0.3em] text-white/40 uppercase"
+            >
+              <li><span class="legend-dot"></span> Strategy</li>
+              <li><span class="legend-dot"></span> Build</li>
+              <li><span class="legend-dot"></span> Launch</li>
+            </ul>
+          </div>
+
+          <div class="process-steps">
+            <article class="process-step">
+              <div class="step-index">01</div>
+              <div>
+                <h4>Signal Sync</h4>
+                <p>
+                  Deep-dive intake, success metrics, and tone boards to lock
+                  narrative + tech constraints.
+                </p>
+              </div>
+            </article>
+
+            <article class="process-step">
+              <div class="step-index">02</div>
+              <div>
+                <h4>Interactive Blueprint</h4>
+                <p>
+                  Low-fi prototypes, 3D concept passes, and copy flows to
+                  validate direction fast.
+                </p>
+              </div>
+            </article>
+
+            <article class="process-step">
+              <div class="step-index">03</div>
+              <div>
+                <h4>Build & Motion</h4>
+                <p>
+                  Component engineering, shader polish, accessibility sweeps,
+                  and performance budgets.
+                </p>
+              </div>
+            </article>
+
+            <article class="process-step">
+              <div class="step-index">04</div>
+              <div>
+                <h4>Launch + Ops</h4>
+                <p>
+                  Staging reviews, instrumentation, and a living backlog for
+                  experiments post-launch.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer / Contact -->
+      <section
+        id="ai-interface"
+        class="py-24 px-6 md:px-24 bg-[#080808] relative z-20 border-t border-white/10"
+      >
+        <div class="max-w-5xl mx-auto">
+          <div
+            class="flex flex-col md:flex-row justify-between items-end mb-12"
+          >
+            <h2
+              class="font-serif text-4xl md:text-6xl text-white uppercase leading-none"
+            >
+              SYSTEM<br /><span class="text-transparent text-outline"
+                >INTELLIGENCE</span
+              >
+            </h2>
+            <p
+              class="font-mono text-xs text-white/40 tracking-widest mt-4 md:mt-0 uppercase"
+            >
+              /// INTERACTIVE TERMINAL
+            </p>
+          </div>
+
+          <!-- Terminal Container -->
+          <div
+            class="w-full h-[60vh] bg-[#1e1e1e] rounded-lg border border-[#333] flex flex-col font-mono text-sm relative overflow-hidden group shadow-2xl"
+            id="terminal-container"
+          >
+            <!-- Linux Terminal Header -->
+            <div
+              class="flex justify-between items-center px-4 py-2 bg-[#2d2d2d] border-b border-[#333] shrink-0"
+            >
+              <div class="text-[#ccc] text-xs select-none">
+                guest@divyanshu.dev: ~
+              </div>
+              <div class="flex gap-3">
+                <div
+                  id="terminal-minimize"
+                  class="w-3 h-3 rounded-full border border-transparent hover:bg-[#ffffff1a] flex items-center justify-center cursor-pointer text-[#ccc] text-[10px]"
+                >
+                  _
+                </div>
+                <div
+                  id="terminal-maximize"
+                  class="w-3 h-3 rounded-full border border-transparent hover:bg-[#ffffff1a] flex items-center justify-center cursor-pointer text-[#ccc] text-[8px]"
+                >
+                  □
+                </div>
+                <div
+                  id="terminal-close"
+                  class="w-3 h-3 rounded-full border border-transparent hover:bg-[#c42b1c] hover:text-white flex items-center justify-center cursor-pointer text-[#ccc] text-[10px]"
+                >
+                  ×
+                </div>
+              </div>
+            </div>
+
+            <!-- Terminal Body (Scrollable) -->
+            <div
+              id="terminal-body"
+              class="flex-1 p-4 overflow-y-auto text-[#cccccc] scrollbar-hide font-mono leading-relaxed cursor-text"
+              onclick="document.getElementById('terminal-input').focus()"
+            >
+              <div id="terminal-output">
+                <div class="text-[#cccccc] mb-2">
+                  Welcome to KODE_OS 1.0 LTS (GNU/Linux 5.15.0-91-generic
+                  x86_64)
+                </div>
+              </div>
+
+              <!-- Active Input Line -->
+              <div class="flex items-center gap-2">
+                <div class="shrink-0">
+                  <span class="text-[#C9C1FC]">guest@divyanshu.dev</span>
+                  <span class="text-white">:</span>
+                  <span class="text-[#4c89c4]" id="terminal-prompt-path"
+                    >~</span
+                  >
+                  <span class="text-white">$</span>
+                </div>
+                <input
+                  type="text"
+                  id="terminal-input"
+                  class="flex-1 bg-transparent border-none outline-none text-[#cccccc] font-mono p-0 m-0 h-6"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Reboot Button (Hidden by default) -->
+          <div
+            id="reboot-container"
+            class="hidden w-full h-[60vh] flex items-center justify-center border border-white/10 bg-[#0c0c0c] rounded-lg"
+          >
+            <button
+              id="reboot-btn"
+              class="px-8 py-3 border border-white/30 text-white font-mono tracking-widest hover:bg-white hover:text-black transition-all uppercase"
+            >
+              /// INITIALIZE SYSTEM
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer / Contact -->
+      <section
+        id="contact"
+        class="h-[80vh] flex flex-col justify-center items-center relative z-10 px-6 bg-[#080808]"
+      >
+        <p
+          class="font-mono text-xs text-white/50 mb-8 tracking-widest uppercase"
+        >
+          /// INITIATE CONTACT
+        </p>
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=yadavdivyanshu428@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative inline-block"
+        >
+          <h2
+            class="font-serif text-[12vw] leading-none group-hover:opacity-0 transition-opacity duration-500 text-white uppercase"
+          >
+            SAY HI.
+          </h2>
+          <h2
+            class="font-serif text-[12vw] leading-none absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-transparent text-outline uppercase"
+          >
+            EMAIL ME.
+          </h2>
+        </a>
+
+        <div
+          class="absolute bottom-12 w-full px-12 flex justify-between font-mono text-xs text-white/30 uppercase"
+        >
+          <div>© 2025 DIVYANSHU YADAV</div>
+          <div class="flex gap-6">
+            <a href="#" class="hover:text-white transition-colors">GITHUB</a>
+            <a href="#" class="hover:text-white transition-colors">LINKEDIN</a>
+            <a href="#" class="hover:text-white transition-colors">YOUTUBE</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
