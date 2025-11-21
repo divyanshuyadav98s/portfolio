@@ -336,6 +336,67 @@ gsap.from(".reveal-type", {
   },
 });
 
+// Stats Counter
+const statCounters = document.querySelectorAll('[data-stat-target]');
+if (statCounters.length) {
+  const animateValue = (el) => {
+    const target = parseFloat(el.dataset.statTarget);
+    const suffix = el.dataset.statSuffix || '';
+    const duration = 1500;
+    const start = performance.now();
+
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      let current = target * eased;
+      if (suffix === 'M') {
+        current = (current).toFixed(1);
+      } else if (suffix === 'd') {
+        current = Math.round(current);
+      } else {
+        current = Math.floor(current);
+      }
+      el.textContent = `${current}${suffix}`;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const statObserver = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateValue(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  statCounters.forEach((counter) => statObserver.observe(counter));
+}
+
+// Process Step Highlight
+const processSteps = document.querySelectorAll('.process-step');
+if (processSteps.length) {
+  const stepObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-active');
+        } else {
+          entry.target.classList.remove('is-active');
+        }
+      });
+    },
+    { threshold: 0.45 }
+  );
+
+  processSteps.forEach((step) => stepObserver.observe(step));
+}
+
 // --- 7. THREE.JS SHATTERED GLASS EFFECT (Optimized for Readability) ---
 const initThree = () => {
   const container = document.getElementById("canvas-container");

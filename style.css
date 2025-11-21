@@ -87,7 +87,7 @@ body.light-theme .hero-sub {
 body.light-theme nav .nav-link,
 body.light-theme nav .text-lg,
 body.light-theme #brand-link {
-    color: rgb(254 254 253) (75%)!important; 
+  color: rgba(254, 254, 253, 0.75) !important; 
 }
 
 /* Ensure mix-blend-difference is active on nav in light theme */
@@ -99,6 +99,7 @@ body.light-theme nav {
 body.light-theme #mobile-menu {
     background-color: #acabab !important;
 }
+
 body.light-theme #mobile-menu .mobile-link {
     color: #ffffff !important;
 }
@@ -107,6 +108,350 @@ body.light-theme #mobile-menu .mobile-link:hover {
     -webkit-text-stroke: 1px #ffffff;
 }
 
+/* Capability Rail */
+.chip {
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.service-rail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.service-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 1.4rem;
+  pointer-events: none;
+  border: 1px solid transparent;
+}
+
+.service-card:hover::after {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.service-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.service-index {
+  font-size: 0.9rem;
+  color: white;
+}
+
+.service-card h4 {
+  font-family: "Syne", sans-serif;
+  font-size: 1.7rem;
+  margin: 0;
+  color: white;
+}
+
+.service-card p {
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+}
+
+.service-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.service-marquee {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 3rem;
+  padding: 1rem 0;
+  animation: marquee 18s linear infinite;
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+body.light-theme .service-card {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+body.light-theme .service-card p,
+body.light-theme .service-card ul {
+  color: rgba(34, 34, 34, 0.7);
+}
+
+body.light-theme .service-card-head {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+body.light-theme .chip {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .service-marquee {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .marquee-track {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* Spotlight Metrics */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.stat-card {
+  padding: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  background: rgba(8, 8, 8, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s; 
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.stat-label {
+  font-family: "Space Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.75rem;
+}
+
+.stat-value {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.stat-caption {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1.25rem;
+  border-radius: 999px;
+  font-family: "Space Mono", monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.status-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.8);
+}
+
+body.light-theme .stat-card {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.light-theme .stat-caption {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+body.light-theme .stat-label {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+body.light-theme .status-pill {
+  background: rgba(255, 255, 255, 0.6);
+  color: #111;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Process Timeline */
+.process-grid {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 992px) {
+  .process-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
+  }
+  .process-sticky {
+    position: sticky;
+    top: 120px;
+  }
+}
+
+.process-legends {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  margin-right: 0.5rem;
+}
+
+.process-steps {
+  position: relative;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 2rem;
+}
+
+.process-step {
+  display: flex;
+  gap: 1.5rem;
+  padding-bottom: 2.5rem;
+  position: relative;
+}
+
+.process-step:last-child {
+  padding-bottom: 0;
+}
+
+.process-step::after {
+  content: "";
+  position: absolute;
+  left: -2rem;
+  bottom: 0;
+  width: 1px;
+  height: calc(100% - 40px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.process-step:last-child::after {
+  display: none;
+}
+
+.step-index {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Mono", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+.process-step h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-family: "Syne", sans-serif;
+  color: white;
+}
+
+.process-step p {
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.process-step.is-active .step-index {
+  background: white;
+  color: #111;
+  border-color: white;
+}
+
+.process-step.is-active h4 {
+  color: white;
+}
+
+body.light-theme .process-steps {
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .process-step::after {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .step-index {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+body.light-theme .process-step h4,
+body.light-theme .process-step.is-active h4 {
+  color: #111;
+}
+
+body.light-theme .process-step p {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+body.light-theme .legend-dot {
+  background: rgba(0, 0, 0, 0.5);
+}
 /* Terminal - Clean Light Theme */
 body.light-theme #terminal-container {
   box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
