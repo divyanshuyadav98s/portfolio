@@ -4,6 +4,162 @@
   --accent-color: #bfb8aa;
 }
 
+/* --- REFINED LIGHT THEME (Swiss/Minimalist Aesthetic) --- */
+body.light-theme {
+  --bg-color: #acabab;
+  --text-color: #ffffff;
+  --accent-color: #ffffff;
+}
+
+/* Global Text Overrides */
+body.light-theme .text-white { color: var(--text-color) !important; }
+body.light-theme .text-white\/90 { color: rgba(255, 255, 255, 0.9) !important; }
+body.light-theme .text-white\/80 { color: rgba(255, 255, 255, 0.8) !important; }
+body.light-theme .text-white\/70 { color: rgba(255, 255, 255, 0.7) !important; }
+body.light-theme .text-white\/60 { color: rgba(255, 255, 255, 0.6) !important; }
+body.light-theme .text-white\/50 { color: rgba(255, 255, 255, 0.5) !important; }
+body.light-theme .text-white\/40 { color: rgba(255, 255, 255, 0.4) !important; }
+body.light-theme .text-white\/30 { color: rgba(255, 255, 255, 0.3) !important; }
+body.light-theme .text-white\/20 { color: rgba(255, 255, 255, 0.2) !important; }
+body.light-theme .text-white\/10 { color: rgba(255, 255, 255, 0.1) !important; }
+
+/* Link Hover Fix (excluding Nav which uses mix-blend) */
+body.light-theme a:not(.nav-link):not(#brand-link):hover {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+/* Section Background Overrides (ID-based for robustness) */
+body.light-theme #hero,
+body.light-theme #about,
+body.light-theme #works,
+body.light-theme #ai-interface,
+body.light-theme #contact {
+    background-color: transparent !important;
+}
+
+/* Tailwind Class Overrides (Backup) */
+body.light-theme .bg-\[\#080808\] { background-color: var(--bg-color) !important; }
+body.light-theme .bg-\[\#0c0c0c\] { background-color: #999999 !important; }
+body.light-theme .bg-white { background-color: #ffffff !important; }
+body.light-theme .bg-white\/20 { background-color: rgba(255, 255, 255, 0.1) !important; }
+body.light-theme .bg-black\/20 { background-color: rgba(0, 0, 0, 0.2) !important; }
+
+/* Border Overrides */
+body.light-theme .border-white\/20 { border-color: rgba(255, 255, 255, 0.1) !important; }
+body.light-theme .border-white\/10 { border-color: rgba(255, 255, 255, 0.05) !important; }
+body.light-theme .border-white\/30 { border-color: rgba(255, 255, 255, 0.2) !important; }
+
+/* Horizontal Scroll Section Fix */
+body.light-theme .horizontal-slide {
+    background-color: var(--bg-color) !important;
+    border-right-color: rgba(255, 255, 255, 0.1) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 3D Background - Stronger Visibility */
+body.light-theme #canvas-container {
+    filter: invert(1);
+    color: #000000;
+}
+/* Noise Overlay */
+body.light-theme .noise-overlay {
+    filter: none;
+    opacity: 0.05;
+}
+
+/* Hero Section Fixes */
+/* Disable mix-blend-difference on the hero container specifically */
+body.light-theme #hero .mix-blend-difference {
+    mix-blend-mode: normal !important;
+}
+body.light-theme .mix-blend-overlay {
+    mix-blend-mode: normal !important;
+}
+body.light-theme .hero-title {
+  color: #ffffff !important;
+}
+body.light-theme .hero-sub {
+  color: #dddddd !important;
+}
+
+/* Navigation - Keep WHITE so mix-blend-difference makes it BLACK */
+body.light-theme nav .nav-link,
+body.light-theme nav .text-lg,
+body.light-theme #brand-link {
+    color: rgb(254 254 253) (75%)!important; 
+}
+
+/* Ensure mix-blend-difference is active on nav in light theme */
+body.light-theme nav {
+    mix-blend-mode: difference !important;
+}
+
+/* Mobile Menu */
+body.light-theme #mobile-menu {
+    background-color: #acabab !important;
+}
+body.light-theme #mobile-menu .mobile-link {
+    color: #ffffff !important;
+}
+body.light-theme #mobile-menu .mobile-link:hover {
+    color: #ffffff !important;
+    -webkit-text-stroke: 1px #ffffff;
+}
+
+/* Terminal - Clean Light Theme */
+body.light-theme #terminal-container {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+body.light-theme .bg-\[\#2d2d2d\] { 
+  background-color: #999999 !important; 
+  border-bottom: 1px solid #888888 !important;
+}
+body.light-theme #terminal-body {
+  background-color: #acabab !important;
+}
+body.light-theme .text-\[\#ccc\] { color: #eeeeee !important; }
+body.light-theme .text-\[\#cccccc\] { color: #ffffff !important; }
+body.light-theme #terminal-input { color: #ffffff !important; }
+
+/* Terminal Syntax Colors (Light Mode) */
+body.light-theme .text-\[\#C9C1FC\] { color: #ffffff !important; } /* Purple */
+body.light-theme .text-\[\#4c89c4\] { color: #ffffff !important; } /* Blue */
+
+/* Outline Text Fix (Contact & Hover) */
+body.light-theme .text-outline {
+    -webkit-text-stroke: 2px rgb(255 255 255) !important;
+    color: #ffffff24 !important;
+}
+body.light-theme .text-outline:hover {
+  color: #ffffff !important;
+  -webkit-text-stroke: 0px !important;
+  text-shadow: none !important;
+}
+
+/* Creative Letter Hover in Light Theme */
+body.light-theme .creative-letter:hover {
+  color: #ffffff !important;
+  text-shadow: 4px 4px 0px rgba(255, 0, 0, 0.5), -4px -4px 0px rgba(0, 0, 255, 0.5) !important;
+}
+
+/* Cursor - Solid Black */
+body.light-theme .cursor-dot {
+    background-color: #ffffff !important;
+    mix-blend-mode: difference !important;
+}
+body.light-theme .cursor-circle {
+    border-color: rgba(255,255,255,0.4) !important;
+    mix-blend-mode: difference !important;
+}
+
+/* Selection */
+body.light-theme ::selection {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);

@@ -705,7 +705,7 @@ ossyNMMMNyMMhsssssssssssssshmmmhssssssso   Font: Space Mono / Consolas
 `;
 
 const commands = {
-    help: () => "Available commands:\n  who, skills, projects, contact\n  ls, cat, cd, pwd, clear\n  git, sudo, uname, date, neofetch, exit",
+    help: () => "Available commands:\n  who, skills, projects, contact\n  ls, cat, cd, pwd, clear\n  git, sudo, uname, date, neofetch, exit\n  theme [dark|light] (switch website theme)",
     ls: () => {
         const dirContent = fileSystem[currentPath];
         return dirContent 
@@ -754,7 +754,25 @@ const commands = {
     projects: () => "List of projects: Project Alpha, System Tool, YouTube Shorts. Type 'cd projects' then 'ls' to see files.",
     work: () => "List of projects: Project Alpha, System Tool, YouTube Shorts. Type 'cd projects' then 'ls' to see files.",
     contact: () => fileSystem["~"]["contact.txt"],
-    email: () => fileSystem["~"]["contact.txt"]
+    email: () => fileSystem["~"]["contact.txt"],
+    theme: (args) => {
+        const mode = args[0];
+        if (mode === "light" || mode === "white") {
+            document.body.classList.add("light-theme");
+            return "Theme switched to Light Mode (White).";
+        } else if (mode === "dark") {
+            document.body.classList.remove("light-theme");
+            return "Theme switched to Dark Mode.";
+        } else {
+            if (document.body.classList.contains("light-theme")) {
+                document.body.classList.remove("light-theme");
+                return "Theme switched to Dark Mode.";
+            } else {
+                document.body.classList.add("light-theme");
+                return "Theme switched to Light Mode (White).";
+            }
+        }
+    }
 };
 
 if (input && output) {
